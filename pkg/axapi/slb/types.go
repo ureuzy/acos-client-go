@@ -33,6 +33,7 @@ type VirtualServer struct {
 	VRID                  int         `json:"vrid"`
 }
 
+// MigrateVip Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#migrate-vip
 type MigrateVip struct {
 	CancelMigration    bool   `json:"cancel-migration"`
 	FinishMigration    bool   `json:"finish-migration"`
