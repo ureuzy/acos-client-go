@@ -10,6 +10,12 @@ A simple go client for [a10 networks](https://www.a10networks.com/)' aXAPI
 
 [godoc](https://pkg.go.dev/github.com/masanetes/acos-client-go)
 
+## Supported Version
+
+| ACOS | aXAPI | Status |
+|:------|:------|:------|
+| 4.1.4 | 3 | :white_check_mark: |
+
 ## Install
 
 ```
@@ -60,4 +66,22 @@ A token is issued when the client is created, and is added to the header as a be
 
 ```go
 client.Authenticate()
+```
+
+## Handle aXAPI error response
+
+acos-client-go treats HTTP responses of 400 or more from aXAPI as errors. The response is wrapped as an error and can be unwrapped
+
+```go
+
+import "github.com/masanetes/acos-client-go/pkg/axapi/errors"
+
+err = c.Slb.DeleteVirtualServer("not-exist-virtualserver")
+if errRes, ok := err.(*errors.ResponseBody); err != nil && ok {
+    fmt.Printf("status: %s, msg: %s\n", errRes.Status, errRes.Msg)
+}
+```
+
+```
+status: fail, msg: Object slb virtual-server {not-exist-virtualserver} does not exist
 ```
