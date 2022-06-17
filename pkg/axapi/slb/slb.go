@@ -11,6 +11,9 @@ type operator struct {
 type Operator interface {
 	ListVirtualServer() (*VirtualServerList, error)
 	GetVirtualServer(name string) (*VirtualServer, error)
+	CreateVirtualServer(virtualServer *VirtualServerBody) (*VirtualServer, error)
+	ModifyVirtualServer(virtualServerName string, virtualServer *VirtualServerBody) (*VirtualServer, error)
+	DeleteVirtualServer(name string) error
 }
 
 func New(c utils.HttpClient) Operator {

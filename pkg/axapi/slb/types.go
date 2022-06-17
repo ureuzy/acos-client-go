@@ -4,33 +4,33 @@ type VirtualServerList []VirtualServer
 
 // VirtualServer Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#virtual-server-attributes
 type VirtualServer struct {
-	AclID                 int         `json:"acl-id"`
-	AclName               string      `json:"acl-name"`
-	ArpDisable            int         `json:"arp-disable"`
-	Description           string      `json:"description"`
-	DisableVipAdv         int         `json:"disable-vip-adv"`
-	EnableDisableAction   string      `json:"enable-disable-action"`
-	Ethernet              int         `json:"ethernet"`
-	ExtendedStats         int         `json:"extended-stats"`
-	HADynamic             int         `json:"ha-dynamic"`
+	AclID                 int         `json:"acl-id,omitempty"`
+	AclName               string      `json:"acl-name,omitempty"`
+	ArpDisable            int         `json:"arp-disable,omitempty"`
+	Description           string      `json:"description,omitempty"`
+	DisableVipAdv         int         `json:"disable-vip-adv,omitempty"`
+	EnableDisableAction   string      `json:"enable-disable-action,omitempty"`
+	Ethernet              int         `json:"ethernet,omitempty"`
+	ExtendedStats         int         `json:"extended-stats,omitempty"`
+	HADynamic             int         `json:"ha-dynamic,omitempty"`
 	IPAddress             string      `json:"ip-address"`
-	IPv6Acl               string      `json:"ipv6-acl"`
-	IPv6Address           string      `json:"ipv6-address"`
-	MigrateVIP            *MigrateVip `json:"migrate-vip"`
+	IPv6Acl               string      `json:"ipv6-acl,omitempty"`
+	IPv6Address           string      `json:"ipv6-address,omitempty"`
+	MigrateVIP            *MigrateVip `json:"migrate-vip,omitempty"`
 	Name                  string      `json:"name"`
-	Netmask               string      `json:"netmask"`
-	PortList              *PortList   `json:"port-list"`
-	RedistributeRouteMap  string      `json:"redistribute-route-map"`
-	RedistributionFlagged int         `json:"redistribution-flagged"`
-	StatsDataAction       string      `json:"stats-data-action"`
-	TemplateLogging       string      `json:"template-logging"`
-	TemplatePolicy        string      `json:"template-policy"`
-	TemplateScaleout      string      `json:"template-scaleout"`
-	TemplateVirtualServer string      `json:"template-virtual-server"`
-	UseIfIP               int         `json:"use-if-ip"`
-	UserTag               string      `json:"user-tag"`
-	UUID                  string      `json:"uuid"`
-	VRID                  int         `json:"vrid"`
+	Netmask               string      `json:"netmask,omitempty"`
+	PortList              *PortList   `json:"port-list,omitempty"`
+	RedistributeRouteMap  string      `json:"redistribute-route-map,omitempty"`
+	RedistributionFlagged int         `json:"redistribution-flagged,omitempty"`
+	StatsDataAction       string      `json:"stats-data-action,omitempty"`
+	TemplateLogging       string      `json:"template-logging,omitempty"`
+	TemplatePolicy        string      `json:"template-policy,omitempty"`
+	TemplateScaleout      string      `json:"template-scaleout,omitempty"`
+	TemplateVirtualServer string      `json:"template-virtual-server,omitempty"`
+	UseIfIP               int         `json:"use-if-ip,omitempty"`
+	UserTag               string      `json:"user-tag,omitempty"`
+	UUID                  string      `json:"uuid,omitempty"`
+	VRID                  int         `json:"vrid,omitempty"`
 }
 
 // MigrateVip Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#migrate-vip

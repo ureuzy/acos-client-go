@@ -17,10 +17,10 @@ type httpClient struct {
 }
 
 type HttpClient interface {
-	GET(path string) (*response, error)
-	POST(path string, body interface{}) (*response, error)
-	PUT(path string, body interface{}) (*response, error)
-	DELETE(path string) (*response, error)
+	GET(path string) (*Response, error)
+	POST(path string, body interface{}) (*Response, error)
+	PUT(path string, body interface{}) (*Response, error)
+	DELETE(path string) (*Response, error)
 	AddHeader(key string, value string)
 }
 
@@ -28,7 +28,7 @@ func NewHttpClient(baseUrl string, client *http.Client, header *http.Header, deb
 	return &httpClient{baseUrl: baseUrl, Client: client, Header: header, debug: debug}
 }
 
-func (c *httpClient) GET(path string) (*response, error) {
+func (c *httpClient) GET(path string) (*Response, error) {
 	req, err := http.NewRequest(
 		http.MethodGet,
 		fmt.Sprintf("%s/%s", c.baseUrl, path),
@@ -43,10 +43,10 @@ func (c *httpClient) GET(path string) (*response, error) {
 		return nil, err
 	}
 
-	return &response{res}, nil
+	return &Response{res}, nil
 }
 
-func (c *httpClient) POST(path string, body interface{}) (*response, error) {
+func (c *httpClient) POST(path string, body interface{}) (*Response, error) {
 	data, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
@@ -66,10 +66,10 @@ func (c *httpClient) POST(path string, body interface{}) (*response, error) {
 		return nil, err
 	}
 
-	return &response{res}, nil
+	return &Response{res}, nil
 }
 
-func (c *httpClient) PUT(path string, body interface{}) (*response, error) {
+func (c *httpClient) PUT(path string, body interface{}) (*Response, error) {
 	data, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
@@ -89,10 +89,10 @@ func (c *httpClient) PUT(path string, body interface{}) (*response, error) {
 		return nil, err
 	}
 
-	return &response{res}, nil
+	return &Response{res}, nil
 }
 
-func (c *httpClient) DELETE(path string) (*response, error) {
+func (c *httpClient) DELETE(path string) (*Response, error) {
 	req, err := http.NewRequest(
 		http.MethodDelete,
 		fmt.Sprintf("%s/%s", c.baseUrl, path),
@@ -107,7 +107,7 @@ func (c *httpClient) DELETE(path string) (*response, error) {
 		return nil, err
 	}
 
-	return &response{res}, nil
+	return &Response{res}, nil
 }
 
 func (c *httpClient) AddHeader(key string, value string) {
@@ -133,15 +133,15 @@ func (c *httpClient) do(req *http.Request) (*http.Response, error) {
 	return res, nil
 }
 
-type response struct {
+type Response struct {
 	*http.Response
 }
 
-func (r *response) HasError() bool {
+func (r *Response) HasError() bool {
 	return r.StatusCode >= http.StatusBadRequest
 }
 
-func (r *response) UnmarshalJson(v interface{}) error {
+func (r *Response) UnmarshalJson(v interface{}) error {
 	buf := new(bytes.Buffer)
 	if _, err := io.Copy(buf, r.Body); err != nil {
 		return err
