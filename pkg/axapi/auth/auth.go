@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"encoding/json"
 	"github.com/masanetes/acos-client-go/utils"
 )
 
@@ -36,12 +35,7 @@ func New(c utils.HttpClient) Operator {
 }
 
 func (o *operator) Request(req *Request) (*AuthResponse, error) {
-	body, err := json.Marshal(req)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := o.POST("/auth", body)
+	res, err := o.POST("/auth", req)
 	if err != nil {
 		return nil, err
 	}

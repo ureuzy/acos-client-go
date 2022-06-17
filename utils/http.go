@@ -18,8 +18,8 @@ type httpClient struct {
 
 type HttpClient interface {
 	GET(path string) (*response, error)
-	POST(path string, body []byte) (*response, error)
-	PUT(path string, body []byte) (*response, error)
+	POST(path string, body interface{}) (*response, error)
+	PUT(path string, body interface{}) (*response, error)
 	DELETE(path string) (*response, error)
 	AddHeader(key string, value string)
 }
@@ -46,11 +46,16 @@ func (c *httpClient) GET(path string) (*response, error) {
 	return &response{res}, nil
 }
 
-func (c *httpClient) POST(path string, body []byte) (*response, error) {
+func (c *httpClient) POST(path string, body interface{}) (*response, error) {
+	data, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+
 	req, err := http.NewRequest(
 		http.MethodPost,
 		fmt.Sprintf("%s/%s", c.baseUrl, path),
-		bytes.NewReader(body),
+		bytes.NewReader(data),
 	)
 	if err != nil {
 		return nil, err
@@ -64,11 +69,16 @@ func (c *httpClient) POST(path string, body []byte) (*response, error) {
 	return &response{res}, nil
 }
 
-func (c *httpClient) PUT(path string, body []byte) (*response, error) {
+func (c *httpClient) PUT(path string, body interface{}) (*response, error) {
+	data, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+
 	req, err := http.NewRequest(
 		http.MethodPut,
 		fmt.Sprintf("%s/%s", c.baseUrl, path),
-		bytes.NewReader(body),
+		bytes.NewReader(data),
 	)
 	if err != nil {
 		return nil, err
@@ -125,6 +135,10 @@ func (c *httpClient) do(req *http.Request) (*http.Response, error) {
 
 type response struct {
 	*http.Response
+}
+
+func (r *response) HasError() bool {
+	return r.StatusCode >= http.StatusBadRequest
 }
 
 func (r *response) UnmarshalJson(v interface{}) error {
