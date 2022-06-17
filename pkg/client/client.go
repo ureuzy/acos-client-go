@@ -44,13 +44,13 @@ func New(conf Config, options ...Option) (*Client, error) {
 	client := generateClient(utils.NewHttpClient(baseUrl, httpClient, &http.Header{}, conf.Debug), conf)
 	client.http.AddHeader("Content-Type", "application/json")
 
-	if err := client.Authorization(); err != nil {
+	if err := client.Authenticate(); err != nil {
 		return nil, err
 	}
 	return client, nil
 }
 
-func (c *Client) Authorization() error {
+func (c *Client) Authenticate() error {
 	if res, err := c.Auth.Request(&auth.Request{Credentials: auth.Credentials{
 		Username: c.conf.User,
 		Password: c.conf.Pass,
