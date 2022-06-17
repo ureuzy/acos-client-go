@@ -1,6 +1,8 @@
 # acos-client-go
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Go Reference](https://pkg.go.dev/badge/github.com/masanetes/acos-client-go.svg)](https://pkg.go.dev/github.com/masanetes/acos-client-go)
+[![report](https://goreportcard.com/badge/github.com/masanetes/acos-client-go)](https://goreportcard.com/report/github.com/masanetes/acos-client-go)
 
 A simple go client for [a10 networks](https://www.a10networks.com/)' aXAPI
 
