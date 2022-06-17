@@ -11,6 +11,8 @@ import (
 )
 
 type Client struct {
+	conf Config
+	http utils.HttpClient
 	Auth auth.Operator
 	Slb  slb.Operator
 }
@@ -32,32 +34,34 @@ func InsecureSkipVerify(b bool) Option {
 	}
 }
 
-func New(conf *Config, options ...Option) (*Client, error) {
+func New(conf Config, options ...Option) (*Client, error) {
 	httpClient := &http.Client{}
 	for _, opt := range options {
 		opt(httpClient)
 	}
 
 	baseUrl := fmt.Sprintf("https://%s/axapi/v3", conf.Host)
-	c := utils.NewHttpClient(baseUrl, httpClient, &http.Header{}, conf.Debug)
-	c.AddHeader("Content-Type", "application/json")
+	client := generateClient(utils.NewHttpClient(baseUrl, httpClient, &http.Header{}, conf.Debug), conf)
+	client.http.AddHeader("Content-Type", "application/json")
 
-	client := generateClient(c)
-	res, err := client.Auth.Request(&auth.Request{Credentials: auth.Credentials{
-		Username: conf.User,
-		Password: conf.Pass,
-	}})
-	if err != nil {
-		return &Client{}, err
+	if err := client.Authorization(); err != nil {
+		return nil, err
 	}
-	c.AddHeader("Authorization", fmt.Sprintf("A10 %s", res.Signature))
-
-	return client, err
+	return client, nil
 }
 
-func generateClient(client utils.HttpClient) *Client {
-	return &Client{
-		auth.New(client),
-		slb.New(client),
+func (c *Client) Authorization() error {
+	if res, err := c.Auth.Request(&auth.Request{Credentials: auth.Credentials{
+		Username: c.conf.User,
+		Password: c.conf.Pass,
+	}}); err != nil {
+		return err
+	} else {
+		c.http.AddHeader("Authorization", fmt.Sprintf("A10 %s", res.Signature))
 	}
+	return nil
+}
+
+func generateClient(client utils.HttpClient, conf Config) *Client {
+	return &Client{conf, client, auth.New(client), slb.New(client)}
 }
