@@ -14,7 +14,7 @@ type Client struct {
 	conf Config
 	http utils.HttpClient
 	Auth auth.Operator
-	Slb  slb.Operator
+	Slb  *slb.Operator
 }
 
 type Config struct {

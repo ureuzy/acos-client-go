@@ -1,21 +1,16 @@
 package slb
 
 import (
+	"github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserver"
 	"github.com/masanetes/acos-client-go/utils"
 )
 
-type operator struct {
-	utils.HttpClient
+type Operator struct {
+	VirtualServer virtualserver.Operator
 }
 
-type Operator interface {
-	ListVirtualServer() (*VirtualServerList, error)
-	GetVirtualServer(name string) (*VirtualServer, error)
-	CreateVirtualServer(virtualServer *VirtualServerBody) (*VirtualServer, error)
-	ModifyVirtualServer(virtualServerName string, virtualServer *VirtualServerBody) (*VirtualServer, error)
-	DeleteVirtualServer(name string) error
-}
-
-func New(c utils.HttpClient) Operator {
-	return &operator{c}
+func New(c utils.HttpClient) *Operator {
+	return &Operator{
+		virtualserver.New(c),
+	}
 }
