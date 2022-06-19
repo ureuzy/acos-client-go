@@ -39,7 +39,7 @@ config := client.Config{Host: "<HOST>", User: "<USER>", Pass: "<PASS>", Debug: f
 c, _ := client.New(config)
 
 // Get virtual server
-vs, _ := c.Slb.GetVirtualServer("masanetes-sample-virtualserver")
+vs, _ := c.Slb.VirtualServer.Get("masanetes-sample-virtualserver")
 fmt.Println(vs.Name, vs.IPAddress)
 ```
 
@@ -78,7 +78,7 @@ acos-client-go treats HTTP responses of 400 or more from aXAPI as errors. The re
 
 import "github.com/masanetes/acos-client-go/pkg/axapi/errors"
 
-err = c.Slb.DeleteVirtualServer("not-exist-virtualserver")
+err = c.Slb.VirtualServer.Delete("not-exist-virtualserver")
 if errRes, ok := err.(*errors.ResponseBody); err != nil && ok {
     fmt.Printf("status: %s, msg: %s\n", errRes.Status, errRes.Msg)
 }
