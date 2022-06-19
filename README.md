@@ -43,6 +43,8 @@ vs, _ := c.Slb.VirtualServer.Get("masanetes-sample-virtualserver")
 fmt.Println(vs.Name, vs.IPAddress)
 ```
 
+[example code](https://github.com/masanetes/acos-client-go/blob/main/example/main.go)
+
 ## Optional Parameter
 
 When creating a client, you can accept optional arguments and customize the http client

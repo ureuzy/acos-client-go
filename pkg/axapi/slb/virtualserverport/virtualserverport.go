@@ -17,6 +17,7 @@ type Operator interface {
 	List(virtualServerName string) (*VirtualServerPortList, error)
 	Get(virtualServerName string, protocol string, portNumber int) (*VirtualServerPort, error)
 	Create(virtualServerName string, object *Object) (*VirtualServerPort, error)
+	CreateList(virtualServerName string, object *ListObject) (*VirtualServerPortList, error)
 	Modify(virtualServerName string, protocol string, portNumber int, object *Object) (*VirtualServerPort, error)
 	Delete(virtualServerName string, protocol string, portNumber int) error
 }
@@ -91,6 +92,29 @@ func (o *operator) Create(virtualServerName string, object *Object) (*VirtualSer
 	}
 
 	return &response.VirtualServerPort, nil
+}
+
+func (o *operator) CreateList(virtualServerName string, object *ListObject) (*VirtualServerPortList, error) {
+	err := errors.EmptyStringError(virtualServerName)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := o.POST(fmt.Sprintf("slb/virtual-server/%s/port", virtualServerName), object)
+	if err != nil {
+		return nil, err
+	}
+
+	if res.HasError() {
+		return nil, errors.Handle(res)
+	}
+
+	var response ListObject
+	if err = res.UnmarshalJson(&response); err != nil {
+		return nil, err
+	}
+
+	return &response.VirtualServerPortList, nil
 }
 
 func (o *operator) Modify(virtualServerName string, protocol string, portNumber int, object *Object) (*VirtualServerPort, error) {

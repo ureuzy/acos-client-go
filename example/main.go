@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserver"
+	"github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserverport"
 	"log"
 
 	"github.com/masanetes/acos-client-go/pkg/client"
@@ -8,13 +10,31 @@ import (
 
 func main() {
 
-	config := client.Config{Host: "192.168.0.10", User: "sample", Pass: "sample", Debug: false}
-	c, err := client.New(&config, client.InsecureSkipVerify(true))
+	config := client.Config{Host: "", User: "", Pass: "", Debug: false}
+	c, err := client.New(config, client.InsecureSkipVerify(true))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	_, err = c.Slb.GetVirtualServer("masanetes-sample-virtualserver")
+	name := "masanetes-sample"
+	ip := "192.168.0.10"
+
+	virtualServer, err := c.Slb.VirtualServer.Create(&virtualserver.Object{
+		VirtualServer: virtualserver.VirtualServer{Name: name, IPAddress: ip}})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = c.Slb.VirtualServerPort.CreateList(virtualServer.Name, &virtualserverport.ListObject{
+		VirtualServerPortList: virtualserverport.VirtualServerPortList{
+			virtualserverport.VirtualServerPort{PortNumber: 80, Protocol: "http"},
+			virtualserverport.VirtualServerPort{PortNumber: 443, Protocol: "https"},
+		}})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = c.Slb.VirtualServer.Delete(virtualServer.Name)
 	if err != nil {
 		log.Fatal(err)
 	}
