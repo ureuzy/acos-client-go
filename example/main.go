@@ -19,16 +19,16 @@ func main() {
 	name := "masanetes-sample"
 	ip := "192.168.0.10"
 
-	virtualServer, err := c.Slb.VirtualServer.Create(&virtualserver.Object{
-		VirtualServer: virtualserver.VirtualServer{Name: name, IPAddress: ip}})
+	virtualServer, err := c.Slb.VirtualServer.Create(&virtualserver.Body{
+		Object: virtualserver.Object{Name: name, IPAddress: ip}})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	_, err = c.Slb.VirtualServerPort.CreateList(virtualServer.Name, &virtualserverport.ListObject{
-		VirtualServerPortList: virtualserverport.VirtualServerPortList{
-			virtualserverport.VirtualServerPort{PortNumber: 80, Protocol: "http"},
-			virtualserverport.VirtualServerPort{PortNumber: 443, Protocol: "https"},
+	_, err = c.Slb.VirtualServerPort.CreateList(virtualServer.Name, &virtualserverport.ListBody{
+		ListObjects: virtualserverport.ListObjects{
+			virtualserverport.Object{PortNumber: 80, Protocol: "http"},
+			virtualserverport.Object{PortNumber: 443, Protocol: "https"},
 		}})
 	if err != nil {
 		log.Fatal(err)

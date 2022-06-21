@@ -1,15 +1,15 @@
 package server
 
-type ListObject struct {
-	ServerList `json:"server-list"`
+type ListBody struct {
+	ListObjects `json:"server-list"`
 }
 
+type Body struct {
+	Object `json:"server"`
+}
+
+// Object Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#server-attributes
 type Object struct {
-	Server `json:"server"`
-}
-
-// Server Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#server-attributes
-type Server struct {
 	Action             string              `json:"action,omitempty"`
 	AlternateServer    *AlternateServer    `json:"alternate-server,omitempty"`
 	ConnLimit          int                 `json:"conn-limit,omitempty"`
@@ -34,7 +34,7 @@ type Server struct {
 	UUID               string              `json:"uuid,omitempty"`
 	Weight             int                 `json:"weight,omitempty"`
 }
-type ServerList []Server
+type ListObjects []Object
 
 // AlternateServer Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#alternate-server
 type AlternateServer struct {

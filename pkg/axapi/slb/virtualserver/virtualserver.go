@@ -14,10 +14,10 @@ type operator struct {
 }
 
 type Operator interface {
-	List() (*VirtualServerList, error)
-	Get(name string) (*VirtualServer, error)
-	Create(object *Object) (*VirtualServer, error)
-	Modify(name string, object *Object) (*VirtualServer, error)
+	List() (*ListObjects, error)
+	Get(name string) (*Object, error)
+	Create(object *Body) (*Object, error)
+	Modify(name string, object *Body) (*Object, error)
 	Delete(name string) error
 }
 
@@ -25,7 +25,7 @@ func New(c utils.HttpClient) Operator {
 	return &operator{c}
 }
 
-func (o *operator) List() (*VirtualServerList, error) {
+func (o *operator) List() (*ListObjects, error) {
 	res, err := o.GET("slb/virtual-server")
 	if err != nil {
 		return nil, err
@@ -35,15 +35,15 @@ func (o *operator) List() (*VirtualServerList, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response ListObject
+	var response ListBody
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServerList, nil
+	return &response.ListObjects, nil
 }
 
-func (o *operator) Get(name string) (*VirtualServer, error) {
+func (o *operator) Get(name string) (*Object, error) {
 	err := errors.EmptyStringError(name)
 	if err != nil {
 		return nil, err
@@ -58,15 +58,15 @@ func (o *operator) Get(name string) (*VirtualServer, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServer, nil
+	return &response.Object, nil
 }
 
-func (o *operator) Create(object *Object) (*VirtualServer, error) {
+func (o *operator) Create(object *Body) (*Object, error) {
 	err := errors.EmptyStringError(object.Name)
 	if err != nil {
 		return nil, err
@@ -81,15 +81,15 @@ func (o *operator) Create(object *Object) (*VirtualServer, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServer, nil
+	return &response.Object, nil
 }
 
-func (o *operator) Modify(name string, object *Object) (*VirtualServer, error) {
+func (o *operator) Modify(name string, object *Body) (*Object, error) {
 	err := errors.EmptyStringError(name)
 	if err != nil {
 		return nil, err
@@ -104,12 +104,12 @@ func (o *operator) Modify(name string, object *Object) (*VirtualServer, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServer, nil
+	return &response.Object, nil
 }
 
 func (o *operator) Delete(name string) error {

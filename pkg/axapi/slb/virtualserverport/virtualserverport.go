@@ -14,11 +14,11 @@ type operator struct {
 }
 
 type Operator interface {
-	List(virtualServerName string) (*VirtualServerPortList, error)
-	Get(virtualServerName string, protocol string, portNumber int) (*VirtualServerPort, error)
-	Create(virtualServerName string, object *Object) (*VirtualServerPort, error)
-	CreateList(virtualServerName string, object *ListObject) (*VirtualServerPortList, error)
-	Modify(virtualServerName string, protocol string, portNumber int, object *Object) (*VirtualServerPort, error)
+	List(virtualServerName string) (*ListObjects, error)
+	Get(virtualServerName string, protocol string, portNumber int) (*Object, error)
+	Create(virtualServerName string, object *Body) (*Object, error)
+	CreateList(virtualServerName string, object *ListBody) (*ListObjects, error)
+	Modify(virtualServerName string, protocol string, portNumber int, object *Body) (*Object, error)
 	Delete(virtualServerName string, protocol string, portNumber int) error
 }
 
@@ -26,7 +26,7 @@ func New(c utils.HttpClient) Operator {
 	return &operator{c}
 }
 
-func (o *operator) List(virtualServerName string) (*VirtualServerPortList, error) {
+func (o *operator) List(virtualServerName string) (*ListObjects, error) {
 	res, err := o.GET(fmt.Sprintf("slb/virtual-server/%s/port", virtualServerName))
 	if err != nil {
 		return nil, err
@@ -36,15 +36,15 @@ func (o *operator) List(virtualServerName string) (*VirtualServerPortList, error
 		return nil, errors.Handle(res)
 	}
 
-	var response ListObject
+	var response ListBody
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServerPortList, nil
+	return &response.ListObjects, nil
 }
 
-func (o *operator) Get(virtualServerName string, protocol string, portNumber int) (*VirtualServerPort, error) {
+func (o *operator) Get(virtualServerName string, protocol string, portNumber int) (*Object, error) {
 	err := errors.EmptyStringError(virtualServerName)
 	if err != nil {
 		return nil, err
@@ -63,15 +63,15 @@ func (o *operator) Get(virtualServerName string, protocol string, portNumber int
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServerPort, nil
+	return &response.Object, nil
 }
 
-func (o *operator) Create(virtualServerName string, object *Object) (*VirtualServerPort, error) {
+func (o *operator) Create(virtualServerName string, object *Body) (*Object, error) {
 	err := errors.EmptyStringError(virtualServerName)
 	if err != nil {
 		return nil, err
@@ -86,15 +86,15 @@ func (o *operator) Create(virtualServerName string, object *Object) (*VirtualSer
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServerPort, nil
+	return &response.Object, nil
 }
 
-func (o *operator) CreateList(virtualServerName string, object *ListObject) (*VirtualServerPortList, error) {
+func (o *operator) CreateList(virtualServerName string, object *ListBody) (*ListObjects, error) {
 	err := errors.EmptyStringError(virtualServerName)
 	if err != nil {
 		return nil, err
@@ -109,15 +109,15 @@ func (o *operator) CreateList(virtualServerName string, object *ListObject) (*Vi
 		return nil, errors.Handle(res)
 	}
 
-	var response ListObject
+	var response ListBody
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServerPortList, nil
+	return &response.ListObjects, nil
 }
 
-func (o *operator) Modify(virtualServerName string, protocol string, portNumber int, object *Object) (*VirtualServerPort, error) {
+func (o *operator) Modify(virtualServerName string, protocol string, portNumber int, object *Body) (*Object, error) {
 	err := errors.EmptyStringError(virtualServerName)
 	if err != nil {
 		return nil, err
@@ -136,12 +136,12 @@ func (o *operator) Modify(virtualServerName string, protocol string, portNumber 
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.VirtualServerPort, nil
+	return &response.Object, nil
 }
 
 func (o *operator) Delete(virtualServerName string, protocol string, portNumber int) error {

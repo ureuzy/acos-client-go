@@ -1,15 +1,15 @@
 package virtualserverport
 
-type ListObject struct {
-	VirtualServerPortList `json:"port-list"`
+type ListBody struct {
+	ListObjects `json:"port-list"`
 }
 
+type Body struct {
+	Object `json:"port"`
+}
+
+// Object Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#port-attributes
 type Object struct {
-	VirtualServerPort `json:"port"`
-}
-
-// VirtualServerPort Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#port-attributes
-type VirtualServerPort struct {
 	AclIDList                        *AclIDList          `json:"acl-id-list,omitempty"`
 	AclNameList                      *AclNameList        `json:"acl-name-list,omitempty"`
 	Action                           string              `json:"action,omitempty"`
@@ -119,7 +119,7 @@ type VirtualServerPort struct {
 	WhenDown                         int                 `json:"when-down,omitempty"`
 	WhenDownProtocol2                int                 `json:"when-down-protocol2,omitempty"`
 }
-type VirtualServerPortList []VirtualServerPort
+type ListObjects []Object
 
 // AclName Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#acl-name-list
 type AclName struct {

@@ -14,10 +14,10 @@ type operator struct {
 }
 
 type Operator interface {
-	List() (*ServerList, error)
-	Get(name string) (*Server, error)
-	Create(object *Object) (*Server, error)
-	Modify(name string, object *Object) (*Server, error)
+	List() (*ListObjects, error)
+	Get(name string) (*Object, error)
+	Create(object *Body) (*Object, error)
+	Modify(name string, object *Body) (*Object, error)
 	Delete(name string) error
 }
 
@@ -25,7 +25,7 @@ func New(c utils.HttpClient) Operator {
 	return &operator{c}
 }
 
-func (o *operator) List() (*ServerList, error) {
+func (o *operator) List() (*ListObjects, error) {
 	res, err := o.GET("slb/server")
 	if err != nil {
 		return nil, err
@@ -35,15 +35,15 @@ func (o *operator) List() (*ServerList, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response ListObject
+	var response ListBody
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.ServerList, nil
+	return &response.ListObjects, nil
 }
 
-func (o *operator) Get(name string) (*Server, error) {
+func (o *operator) Get(name string) (*Object, error) {
 	err := errors.EmptyStringError(name)
 	if err != nil {
 		return nil, err
@@ -58,15 +58,15 @@ func (o *operator) Get(name string) (*Server, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.Server, nil
+	return &response.Object, nil
 }
 
-func (o *operator) Create(object *Object) (*Server, error) {
+func (o *operator) Create(object *Body) (*Object, error) {
 	err := errors.EmptyStringError(object.Name)
 	if err != nil {
 		return nil, err
@@ -81,15 +81,15 @@ func (o *operator) Create(object *Object) (*Server, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.Server, nil
+	return &response.Object, nil
 }
 
-func (o *operator) Modify(name string, object *Object) (*Server, error) {
+func (o *operator) Modify(name string, object *Body) (*Object, error) {
 	err := errors.EmptyStringError(name)
 	if err != nil {
 		return nil, err
@@ -104,12 +104,12 @@ func (o *operator) Modify(name string, object *Object) (*Server, error) {
 		return nil, errors.Handle(res)
 	}
 
-	var response Object
+	var response Body
 	if err = res.UnmarshalJson(&response); err != nil {
 		return nil, err
 	}
 
-	return &response.Server, nil
+	return &response.Object, nil
 }
 
 func (o *operator) Delete(name string) error {
