@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/masanetes/acos-client-go/pkg/axapi/auth"
-	"github.com/masanetes/acos-client-go/pkg/axapi/slb"
-	"github.com/masanetes/acos-client-go/utils"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/auth"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb"
+	"github.com/ureuzy/acos-client-go/utils"
 )
 
 type Client struct {

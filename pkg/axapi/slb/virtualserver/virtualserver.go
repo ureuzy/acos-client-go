@@ -3,8 +3,8 @@ package virtualserver
 import (
 	"fmt"
 
-	"github.com/masanetes/acos-client-go/pkg/axapi/errors"
-	"github.com/masanetes/acos-client-go/utils"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/errors"
+	"github.com/ureuzy/acos-client-go/utils"
 )
 
 // Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#virtual-server-specification

@@ -1,10 +1,10 @@
 package slb
 
 import (
-	"github.com/masanetes/acos-client-go/pkg/axapi/slb/server"
-	"github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserver"
-	"github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserverport"
-	"github.com/masanetes/acos-client-go/utils"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/server"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserver"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserverport"
+	"github.com/ureuzy/acos-client-go/utils"
 )
 
 type Operator struct {

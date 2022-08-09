@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"github.com/masanetes/acos-client-go/utils"
+	"github.com/ureuzy/acos-client-go/utils"
 )
 
 type operator struct {

@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserver"
-	"github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserverport"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserver"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserverport"
 	"log"
 
-	"github.com/masanetes/acos-client-go/pkg/client"
+	"github.com/ureuzy/acos-client-go/pkg/client"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	name := "masanetes-sample"
+	name := "ureuzy-sample"
 	ip := "192.168.0.10"
 
 	virtualServer, err := c.Slb.VirtualServer.Create(&virtualserver.Body{

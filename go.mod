@@ -1,3 +1,3 @@
-module github.com/masanetes/acos-client-go
+module github.com/ureuzy/acos-client-go
 
 go 1.17

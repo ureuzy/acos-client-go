@@ -43,7 +43,7 @@ vs, _ := c.Slb.VirtualServer.Get("ureuzy-sample-virtualserver")
 fmt.Println(vs.Name, vs.IPAddress)
 ```
 
-[example code](https://github.com/masanetes/acos-client-go/blob/main/example/main.go)
+[example code](https://github.com/ureuzy/acos-client-go/blob/main/example/main.go)
 
 ## Optional Parameter
 
@@ -78,7 +78,7 @@ acos-client-go treats HTTP responses of 400 or more from aXAPI as errors. The re
 
 ```go
 
-import "github.com/masanetes/acos-client-go/pkg/axapi/errors"
+import "github.com/ureuzy/acos-client-go/pkg/axapi/errors"
 
 err = c.Slb.VirtualServer.Delete("not-exist-virtualserver")
 if errRes, ok := err.(*errors.ResponseBody); err != nil && ok {

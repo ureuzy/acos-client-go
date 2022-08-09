@@ -1,6 +1,6 @@
 package virtualserver
 
-import "github.com/masanetes/acos-client-go/pkg/axapi/slb/virtualserverport"
+import "github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserverport"
 
 type ListBody struct {
 	ListObjects `json:"virtual-server-list"`

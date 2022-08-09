@@ -3,7 +3,7 @@ package errors
 import (
 	"errors"
 
-	"github.com/masanetes/acos-client-go/utils"
+	"github.com/ureuzy/acos-client-go/utils"
 )
 
 type ResponseBody struct {
