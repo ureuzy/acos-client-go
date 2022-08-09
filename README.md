@@ -1,8 +1,8 @@
 # acos-client-go
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Go Reference](https://pkg.go.dev/badge/github.com/masanetes/acos-client-go.svg)](https://pkg.go.dev/github.com/masanetes/acos-client-go)
-[![report](https://goreportcard.com/badge/github.com/masanetes/acos-client-go)](https://goreportcard.com/report/github.com/masanetes/acos-client-go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/ureuzy/acos-client-go.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
+[![report](https://goreportcard.com/badge/github.com/ureuzy/acos-client-go)](https://goreportcard.com/report/github.com/ureuzy/acos-client-go)
 
 A simple go client for [a10 networks](https://www.a10networks.com/)' aXAPI
 
@@ -10,7 +10,7 @@ A simple go client for [a10 networks](https://www.a10networks.com/)' aXAPI
 
 ## Documentation
 
-[godoc](https://pkg.go.dev/github.com/masanetes/acos-client-go)
+[godoc](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
 
 ## Supported Version
 
@@ -21,7 +21,7 @@ A simple go client for [a10 networks](https://www.a10networks.com/)' aXAPI
 ## Install
 
 ```
-go get -u github.com/masanetes/acos-client-go
+go get -u github.com/ureuzy/acos-client-go
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ go get -u github.com/masanetes/acos-client-go
 Import
 
 ```go
-import "github.com/masanetes/acos-client-go"
+import "github.com/ureuzy/acos-client-go"
 ```
 
 New client
@@ -39,7 +39,7 @@ config := client.Config{Host: "<HOST>", User: "<USER>", Pass: "<PASS>", Debug: f
 c, _ := client.New(config)
 
 // Get virtual server
-vs, _ := c.Slb.VirtualServer.Get("masanetes-sample-virtualserver")
+vs, _ := c.Slb.VirtualServer.Get("ureuzy-sample-virtualserver")
 fmt.Println(vs.Name, vs.IPAddress)
 ```
 
