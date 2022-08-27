@@ -10,10 +10,10 @@ type Credentials struct {
 }
 
 type Response struct {
-	*AuthResponse `json:"authresponse"`
+	*Body `json:"authresponse"`
 }
 
-type AuthResponse struct {
+type Body struct {
 	Signature   string `json:"signature"`
 	Description string `json:"description"`
 }

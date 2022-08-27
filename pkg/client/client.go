@@ -5,16 +5,22 @@ import (
 	"fmt"
 	"net/http"
 
+	ap "github.com/ureuzy/acos-client-go/pkg/axapi/activepartition"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/auth"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/health"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/slb"
 	"github.com/ureuzy/acos-client-go/utils"
 )
 
 type Client struct {
-	conf Config
-	http utils.HttpClient
-	Auth auth.Operator
-	Slb  *slb.Operator
+	conf            Config
+	http            utils.HTTPClient
+	Auth            auth.Operator
+	ActivePartition ap.Operator
+	Health          *health.Operator
+	Slb             *slb.Operator
+	Gslb            *gslb.Operator
 }
 
 type Config struct {
@@ -40,28 +46,37 @@ func New(conf Config, options ...Option) (*Client, error) {
 		opt(httpClient)
 	}
 
-	baseUrl := fmt.Sprintf("https://%s/axapi/v3", conf.Host)
-	client := generateClient(utils.NewHttpClient(baseUrl, httpClient, &http.Header{}, conf.Debug), conf)
+	baseURL := fmt.Sprintf("https://%s/axapi/v3", conf.Host)
+	client := generateClient(utils.NewHTTPClient(baseURL, httpClient, &http.Header{}, conf.Debug), conf)
 	client.http.AddHeader("Content-Type", "application/json")
 
 	if err := client.Authenticate(); err != nil {
 		return nil, err
 	}
+
 	return client, nil
 }
 
 func (c *Client) Authenticate() error {
-	if res, err := c.Auth.Request(&auth.Request{Credentials: auth.Credentials{
+	res, err := c.Auth.Request(&auth.Request{Credentials: auth.Credentials{
 		Username: c.conf.User,
 		Password: c.conf.Pass,
-	}}); err != nil {
+	}})
+	if err != nil {
 		return err
-	} else {
-		c.http.AddHeader("Authorization", fmt.Sprintf("A10 %s", res.Signature))
 	}
+	c.http.AddHeader("Authorization", fmt.Sprintf("A10 %s", res.Signature))
 	return nil
 }
 
-func generateClient(client utils.HttpClient, conf Config) *Client {
-	return &Client{conf, client, auth.New(client), slb.New(client)}
+func generateClient(client utils.HTTPClient, conf Config) *Client {
+	return &Client{
+		conf:            conf,
+		http:            client,
+		Auth:            auth.New(client),
+		ActivePartition: ap.New(client),
+		Health:          health.New(client),
+		Slb:             slb.New(client),
+		Gslb:            gslb.New(client),
+	}
 }

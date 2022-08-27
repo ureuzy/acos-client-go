@@ -39,7 +39,7 @@ func EmptyStringError(s string) error {
 
 func Handle(response *utils.Response) error {
 	var errResponse ResponseBody
-	if err := response.UnmarshalJson(&errResponse); err != nil {
+	if err := response.UnmarshalJSON(&errResponse); err != nil {
 		return err
 	}
 	return &errResponse
