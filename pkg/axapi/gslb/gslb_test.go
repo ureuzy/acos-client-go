@@ -1,11 +1,12 @@
 package gslb_test
 
 import (
-	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb"
 	"io"
 	"net/http"
 	"strings"
 	"testing"
+
+	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb"
 
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/gomega"

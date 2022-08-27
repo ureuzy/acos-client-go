@@ -1,11 +1,12 @@
 package slb_test
 
 import (
-	"github.com/ureuzy/acos-client-go/pkg/axapi/slb"
 	"io"
 	"net/http"
 	"strings"
 	"testing"
+
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb"
 
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/gomega"

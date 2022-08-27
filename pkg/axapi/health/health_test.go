@@ -34,5 +34,4 @@ func TestGetMonitor(t *testing.T) {
 	res, err := sut.Montitor.Get("resource1")
 	Ω(err).ShouldNot(HaveOccurred())
 	Ω(res).ShouldNot(BeNil())
-
 }
