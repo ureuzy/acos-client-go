@@ -1,7 +1,6 @@
 package client
 
 import (
-	"crypto/tls"
 	"fmt"
 	"net/http"
 
@@ -31,14 +30,6 @@ type Config struct {
 }
 
 type Option func(*http.Client)
-
-func InsecureSkipVerify(b bool) Option {
-	return func(client *http.Client) {
-		client.Transport = &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: b},
-		}
-	}
-}
 
 func New(conf Config, options ...Option) (*Client, error) {
 	httpClient := &http.Client{}
