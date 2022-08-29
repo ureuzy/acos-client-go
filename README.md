@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Go Reference](https://pkg.go.dev/badge/github.com/ureuzy/acos-client-go.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
 [![report](https://goreportcard.com/badge/github.com/ureuzy/acos-client-go)](https://goreportcard.com/report/github.com/ureuzy/acos-client-go)
+[![codecov](https://codecov.io/gh/ureuzy/acos-client-go/branch/main/graph/badge.svg?token=E0L2IRLDTZ)](https://codecov.io/gh/ureuzy/acos-client-go)
 
 A simple go client for [a10 networks](https://www.a10networks.com/)' aXAPI
 
