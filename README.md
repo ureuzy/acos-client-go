@@ -61,7 +61,12 @@ There are also several options available that are likely to be used more frequen
 **TLS insecure skip verify**
 
 ```go
-client.New(config, client.InsecureSkipVerify(true))
+opt := func(c *http.Client) {
+    c.Transport = &http.Transport{
+        TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+    }
+}
+c, err := client.New(config, opt)
 ```
 
 ## Authenticate
