@@ -27,8 +27,8 @@ type Body struct {
 // Object Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#virtual-server-attributes
 type Object struct {
 	shared.AxaBase        `json:",inline"`
-	AclID                 int                            `json:"acl-id,omitempty"`
-	AclName               string                         `json:"acl-name,omitempty"`
+	ACLID                 int                            `json:"acl-id,omitempty"`
+	ACLName               string                         `json:"acl-name,omitempty"`
 	ArpDisable            int                            `json:"arp-disable,omitempty"`
 	Description           string                         `json:"description,omitempty"`
 	DisableVipAdv         int                            `json:"disable-vip-adv,omitempty"`
@@ -37,7 +37,7 @@ type Object struct {
 	ExtendedStats         int                            `json:"extended-stats,omitempty"`
 	HADynamic             int                            `json:"ha-dynamic,omitempty"`
 	IPAddress             string                         `json:"ip-address"`
-	IPv6Acl               string                         `json:"ipv6-acl,omitempty"`
+	IPv6ACL               string                         `json:"ipv6-acl,omitempty"`
 	IPv6Address           string                         `json:"ipv6-address,omitempty"`
 	MigrateVIP            *MigrateVip                    `json:"migrate-vip,omitempty"`
 	Name                  string                         `json:"name"`
@@ -60,7 +60,7 @@ type MigrateVip struct {
 	shared.AxaBase     `json:",inline"`
 	CancelMigration    bool   `json:"cancel-migration,omitempty"`
 	FinishMigration    bool   `json:"finish-migration,omitempty"`
-	TargetDataCpu      int    `json:"target-data-cpu,omitempty"`
+	TargetDataCPU      int    `json:"target-data-cpu,omitempty"`
 	TargetFloatingIPv4 string `json:"target-floating-ipv4,omitempty"`
 	TargetFloatingIPv6 string `json:"target-floating-ipv6,omitempty"`
 }

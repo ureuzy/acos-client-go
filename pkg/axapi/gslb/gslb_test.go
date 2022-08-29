@@ -6,10 +6,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb"
-
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/gomega"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb"
 	mockutils "github.com/ureuzy/acos-client-go/pkg/mocks/utils"
 	"github.com/ureuzy/acos-client-go/utils"
 )

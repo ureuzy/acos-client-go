@@ -26,8 +26,8 @@ type Body struct {
 // Object Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#port-attributes
 type Object struct {
 	shared.AxaBase                   `json:",inline"`
-	AclIDList                        *AclIDList             `json:"acl-id-list,omitempty"`
-	AclNameList                      *AclNameList           `json:"acl-name-list,omitempty"`
+	ACLIDList                        *ACLIDList             `json:"acl-id-list,omitempty"`
+	ACLNameList                      *ACLNameList           `json:"acl-name-list,omitempty"`
 	Action                           string                 `json:"action,omitempty"`
 	AflexScripts                     *AflexScripts          `json:"aflex-scripts,omitempty"`
 	AltProtocol1                     string                 `json:"alt-protocol1,omitempty"`
@@ -63,7 +63,7 @@ type Object struct {
 	Protocol                         string                 `json:"protocol,omitempty"`
 	Range                            int                    `json:"range,omitempty"`
 	Rate                             int                    `json:"rate,omitempty"`
-	RedirectToHttps                  int                    `json:"redirect-to-https,omitempty"`
+	RedirectToHTTPS                  int                    `json:"redirect-to-https,omitempty"`
 	ReqFail                          int                    `json:"req-fail,omitempty"`
 	Reset                            int                    `json:"reset,omitempty"`
 	ResetOnServerSelectionFail       int                    `json:"reset-on-server-selection-fail,omitempty"`
@@ -82,7 +82,7 @@ type Object struct {
 	SkipRevHash                      int                    `json:"skip-rev-hash,omitempty"`
 	SNatOnVip                        int                    `json:"snat-on-vip,omitempty"`
 	StatsDataAction                  string                 `json:"stats-data-action,omitempty"`
-	SupportHttp2                     int                    `json:"support-http2,omitempty"`
+	SupportHTTP2                     int                    `json:"support-http2,omitempty"`
 	SynCookie                        int                    `json:"syn-cookie,omitempty"`
 	TemplateCache                    string                 `json:"template-cache,omitempty"`
 	TemplateClientSSL                string                 `json:"template-client-ssl,omitempty"`
@@ -112,7 +112,7 @@ type Object struct {
 	TemplateServerSSLShared          string                 `json:"template-server-ssl-shared,omitempty"`
 	TemplateSip                      string                 `json:"template-sip,omitempty"`
 	TemplateSmpp                     string                 `json:"template-smpp,omitempty"`
-	TemplateSmtp                     string                 `json:"template-smtp,omitempty"`
+	TemplateSMTP                     string                 `json:"template-smtp,omitempty"`
 	TemplateSsli                     string                 `json:"template-ssli,omitempty"`
 	TemplateTCP                      string                 `json:"template-tcp,omitempty"`
 	TemplateTCPProxy                 string                 `json:"template-tcp-proxy,omitempty"`
@@ -135,18 +135,18 @@ type Object struct {
 }
 type ListObjects []Object
 
-// AclNameList Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#acl-name-list
-type AclNameList []struct {
-	AclName           string `json:"acl-name,omitempty"`
-	AclNameSeqNum     int    `json:"acl-name-seq-num,omitempty"`
-	AclNameSrcNatPool string `json:"acl-name-src-nat-pool,omitempty"`
+// ACLNameList Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#acl-name-list
+type ACLNameList []struct {
+	ACLName           string `json:"acl-name,omitempty"`
+	ACLNameSeqNum     int    `json:"acl-name-seq-num,omitempty"`
+	ACLNameSrcNatPool string `json:"acl-name-src-nat-pool,omitempty"`
 }
 
-// AclIDList Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#acl-id-list
-type AclIDList []struct {
-	AclID           int    `json:"acl-id,omitempty"`
-	AclIDSeqNum     int    `json:"acl-id-seq-num,omitempty"`
-	AclIDSrcNatPool string `json:"acl-id-src-nat-pool,omitempty"`
+// ACLIDList Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#acl-id-list
+type ACLIDList []struct {
+	ACLID           int    `json:"acl-id,omitempty"`
+	ACLIDSeqNum     int    `json:"acl-id-seq-num,omitempty"`
+	ACLIDSrcNatPool string `json:"acl-id-src-nat-pool,omitempty"`
 }
 
 // AflexScripts Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#aflex-scripts
