@@ -1,20 +1,25 @@
 name: Test
-on: push
+on: [push, pull_request]
+
 jobs:
-  build:
-    name: Test
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: ^1.18
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Set up go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+
       - name: Test
-        run: make test
-        env:
-          CGO_ENABLED: 0
-          GO111MODULE: on
-          GOOS: linux
-          GOARCH: amd64
+        run: make unit-test
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
