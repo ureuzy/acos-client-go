@@ -3,129 +3,64 @@ package virtualserver
 import (
 	"fmt"
 
-	"github.com/ureuzy/acos-client-go/pkg/axapi/errors"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/shared"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserverport"
+	"github.com/ureuzy/acos-client-go/pkg/rest"
 	"github.com/ureuzy/acos-client-go/utils"
 )
 
 // Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#virtual-server-specification
 
-type operator struct {
-	utils.HttpClient
+func New(c utils.HTTPClient, basePath string) rest.Operator[Body, ListBody] {
+	const path = "virtual-server"
+	return rest.Rest[Body, ListBody](c, fmt.Sprintf("%s/%s", basePath, path))
 }
 
-type Operator interface {
-	List() (*ListObjects, error)
-	Get(name string) (*Object, error)
-	Create(object *Body) (*Object, error)
-	Modify(name string, object *Body) (*Object, error)
-	Delete(name string) error
+type ListBody struct {
+	ListObjects `json:"virtual-server-list"`
 }
 
-func New(c utils.HttpClient) Operator {
-	return &operator{c}
+type Body struct {
+	Object `json:"virtual-server"`
 }
 
-func (o *operator) List() (*ListObjects, error) {
-	res, err := o.GET("slb/virtual-server")
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response ListBody
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.ListObjects, nil
+// Object Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#virtual-server-attributes
+type Object struct {
+	shared.AxaBase        `json:",inline"`
+	ACLID                 int                            `json:"acl-id,omitempty"`
+	ACLName               string                         `json:"acl-name,omitempty"`
+	ArpDisable            int                            `json:"arp-disable,omitempty"`
+	Description           string                         `json:"description,omitempty"`
+	DisableVipAdv         int                            `json:"disable-vip-adv,omitempty"`
+	EnableDisableAction   string                         `json:"enable-disable-action,omitempty"`
+	Ethernet              int                            `json:"ethernet,omitempty"`
+	ExtendedStats         int                            `json:"extended-stats,omitempty"`
+	HADynamic             int                            `json:"ha-dynamic,omitempty"`
+	IPAddress             string                         `json:"ip-address"`
+	IPv6ACL               string                         `json:"ipv6-acl,omitempty"`
+	IPv6Address           string                         `json:"ipv6-address,omitempty"`
+	MigrateVIP            *MigrateVip                    `json:"migrate-vip,omitempty"`
+	Name                  string                         `json:"name"`
+	Netmask               string                         `json:"netmask,omitempty"`
+	PortList              *virtualserverport.ListObjects `json:"port-list,omitempty"`
+	RedistributeRouteMap  string                         `json:"redistribute-route-map,omitempty"`
+	RedistributionFlagged int                            `json:"redistribution-flagged,omitempty"`
+	StatsDataAction       string                         `json:"stats-data-action,omitempty"`
+	TemplateLogging       string                         `json:"template-logging,omitempty"`
+	TemplatePolicy        string                         `json:"template-policy,omitempty"`
+	TemplateScaleout      string                         `json:"template-scaleout,omitempty"`
+	TemplateVirtualServer string                         `json:"template-virtual-server,omitempty"`
+	UseIfIP               int                            `json:"use-if-ip,omitempty"`
+	VRID                  int                            `json:"vrid,omitempty"`
 }
+type ListObjects []Object
 
-func (o *operator) Get(name string) (*Object, error) {
-	err := errors.EmptyStringError(name)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := o.GET(fmt.Sprintf("slb/virtual-server/%s", name))
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response Body
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.Object, nil
-}
-
-func (o *operator) Create(object *Body) (*Object, error) {
-	err := errors.EmptyStringError(object.Name)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := o.POST("slb/virtual-server", object)
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response Body
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.Object, nil
-}
-
-func (o *operator) Modify(name string, object *Body) (*Object, error) {
-	err := errors.EmptyStringError(name)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := o.POST(fmt.Sprintf("slb/virtual-server/%s", name), object)
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response Body
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.Object, nil
-}
-
-func (o *operator) Delete(name string) error {
-	err := errors.EmptyStringError(name)
-	if err != nil {
-		return err
-	}
-
-	res, err := o.DELETE(fmt.Sprintf("slb/virtual-server/%s", name))
-	if err != nil {
-		return err
-	}
-
-	if res.HasError() {
-		return errors.Handle(res)
-	}
-
-	return nil
+// MigrateVip Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server.html#migrate-vip
+type MigrateVip struct {
+	shared.AxaBase     `json:",inline"`
+	CancelMigration    bool   `json:"cancel-migration,omitempty"`
+	FinishMigration    bool   `json:"finish-migration,omitempty"`
+	TargetDataCPU      int    `json:"target-data-cpu,omitempty"`
+	TargetFloatingIPv4 string `json:"target-floating-ipv4,omitempty"`
+	TargetFloatingIPv6 string `json:"target-floating-ipv6,omitempty"`
 }

@@ -3,129 +3,89 @@ package server
 import (
 	"fmt"
 
-	"github.com/ureuzy/acos-client-go/pkg/axapi/errors"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/shared"
+	"github.com/ureuzy/acos-client-go/pkg/rest"
 	"github.com/ureuzy/acos-client-go/utils"
 )
 
 // Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#server-specification
 
-type operator struct {
-	utils.HttpClient
+func New(c utils.HTTPClient, basePath string) rest.Operator[Body, ListBody] {
+	const path = "server"
+	return rest.Rest[Body, ListBody](c, fmt.Sprintf("%s/%s", basePath, path))
 }
 
-type Operator interface {
-	List() (*ListObjects, error)
-	Get(name string) (*Object, error)
-	Create(object *Body) (*Object, error)
-	Modify(name string, object *Body) (*Object, error)
-	Delete(name string) error
+type ListBody struct {
+	ListObjects `json:"server-list"`
 }
 
-func New(c utils.HttpClient) Operator {
-	return &operator{c}
+type Body struct {
+	Object `json:"server"`
 }
 
-func (o *operator) List() (*ListObjects, error) {
-	res, err := o.GET("slb/server")
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response ListBody
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.ListObjects, nil
+// Object Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#server-attributes
+type Object struct {
+	shared.AxaBase     `json:",inline"`
+	Action             string                 `json:"action,omitempty"`
+	AlternateServer    *AlternateServer       `json:"alternate-server,omitempty"`
+	ConnLimit          int                    `json:"conn-limit,omitempty"`
+	ConnResume         int                    `json:"conn-resume,omitempty"`
+	ExtendedStats      int                    `json:"extended-stats,omitempty"`
+	ExternalIP         string                 `json:"external-ip,omitempty"`
+	FqdnName           string                 `json:"fqdn-name,omitempty"`
+	HealthCheck        string                 `json:"health-check,omitempty"`
+	HealthCheckDisable int                    `json:"health-check-disable,omitempty"`
+	Host               string                 `json:"host,omitempty"`
+	IPv6               string                 `json:"ipv6,omitempty"`
+	Name               string                 `json:"name,omitempty"`
+	NoLogging          int                    `json:"no-logging,omitempty"`
+	PortList           *PortList              `json:"port-list,omitempty"`
+	SamplingEnable     *shared.SamplingEnable `json:"sampling-enable,omitempty"`
+	ServerIPv6Addr     string                 `json:"server-ipv6-addr,omitempty"`
+	SlowStart          int                    `json:"slow-start,omitempty"`
+	SpoofingCache      int                    `json:"spoofing-cache,omitempty"`
+	StatsDataAction    string                 `json:"stats-data-action,omitempty"`
+	TemplateServer     string                 `json:"template-server,omitempty"`
+	Weight             int                    `json:"weight,omitempty"`
 }
+type ListObjects []Object
 
-func (o *operator) Get(name string) (*Object, error) {
-	err := errors.EmptyStringError(name)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := o.GET(fmt.Sprintf("slb/server/%s", name))
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response Body
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.Object, nil
+// AlternateServer Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#alternate-server
+type AlternateServer struct {
+	Alternate     int    `json:"alternate,omitempty"`
+	AlternateName string `json:"alternate-name,omitempty"`
 }
+type AlternateServerList []AlternateServer
 
-func (o *operator) Create(object *Body) (*Object, error) {
-	err := errors.EmptyStringError(object.Name)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := o.POST("slb/server", object)
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response Body
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.Object, nil
+// Port Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#port-list
+type Port struct {
+	shared.AxaBase        `json:",inline"`
+	Action                string                 `json:"action,omitempty"`
+	AlternatePort         []string               `json:"alternate-port,omitempty"`
+	AuthCfg               *AuthCfg               `json:"auth-cfg,omitempty"`
+	ConnLimit             int                    `json:"conn-limit,omitempty"`
+	ConnResume            int                    `json:"conn-resume,omitempty"`
+	ExtendedStats         int                    `json:"extended-stats,omitempty"`
+	FollowPortProtocol    string                 `json:"follow-port-protocol,omitempty"`
+	HealthCheck           string                 `json:"health-check,omitempty"`
+	HealthCheckDisable    int                    `json:"health-check-disable,omitempty"`
+	HealthCheckFollowPort int                    `json:"health-check-follow-port,omitempty"`
+	NoLogging             int                    `json:"no-logging,omitempty"`
+	NoSSL                 int                    `json:"no-ssl,omitempty"`
+	PortNumber            int                    `json:"port-number,omitempty"`
+	Protocol              string                 `json:"protocol,omitempty"`
+	Range                 int                    `json:"range,omitempty"`
+	SamplingEnable        *shared.SamplingEnable `json:"sampling-enable,omitempty"`
+	ServerIPv6Addr        string                 `json:"server-ipv6-addr,omitempty"`
+	SlowStart             int                    `json:"slow-start,omitempty"`
+	SpoofingCache         int                    `json:"spoofing-cache,omitempty"`
+	StatsDataAction       string                 `json:"stats-data-action,omitempty"`
+	TemplateServer        string                 `json:"template-server,omitempty"`
+	Weight                int                    `json:"weight,omitempty"`
 }
+type PortList []Port
 
-func (o *operator) Modify(name string, object *Body) (*Object, error) {
-	err := errors.EmptyStringError(name)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := o.POST(fmt.Sprintf("slb/server/%s", name), object)
-	if err != nil {
-		return nil, err
-	}
-
-	if res.HasError() {
-		return nil, errors.Handle(res)
-	}
-
-	var response Body
-	if err = res.UnmarshalJson(&response); err != nil {
-		return nil, err
-	}
-
-	return &response.Object, nil
-}
-
-func (o *operator) Delete(name string) error {
-	err := errors.EmptyStringError(name)
-	if err != nil {
-		return err
-	}
-
-	res, err := o.DELETE(fmt.Sprintf("slb/server/%s", name))
-	if err != nil {
-		return err
-	}
-
-	if res.HasError() {
-		return errors.Handle(res)
-	}
-
-	return nil
+// AuthCfg Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#port-list-auth-cfg
+type AuthCfg struct {
+	ServicePrincipalName string `json:"service-principal-name,omitempty"`
 }

@@ -10,13 +10,13 @@ import (
 )
 
 type httpClient struct {
-	baseUrl string
+	baseURL string
 	debug   bool
 	*http.Client
 	*http.Header
 }
 
-type HttpClient interface {
+type HTTPClient interface {
 	GET(path string) (*Response, error)
 	POST(path string, body interface{}) (*Response, error)
 	PUT(path string, body interface{}) (*Response, error)
@@ -24,14 +24,14 @@ type HttpClient interface {
 	AddHeader(key string, value string)
 }
 
-func NewHttpClient(baseUrl string, client *http.Client, header *http.Header, debug bool) HttpClient {
-	return &httpClient{baseUrl: baseUrl, Client: client, Header: header, debug: debug}
+func NewHTTPClient(baseURL string, client *http.Client, header *http.Header, debug bool) HTTPClient {
+	return &httpClient{baseURL: baseURL, Client: client, Header: header, debug: debug}
 }
 
 func (c *httpClient) GET(path string) (*Response, error) {
 	req, err := http.NewRequest(
 		http.MethodGet,
-		fmt.Sprintf("%s/%s", c.baseUrl, path),
+		fmt.Sprintf("%s/%s", c.baseURL, path),
 		nil,
 	)
 	if err != nil {
@@ -54,7 +54,7 @@ func (c *httpClient) POST(path string, body interface{}) (*Response, error) {
 
 	req, err := http.NewRequest(
 		http.MethodPost,
-		fmt.Sprintf("%s/%s", c.baseUrl, path),
+		fmt.Sprintf("%s/%s", c.baseURL, path),
 		bytes.NewReader(data),
 	)
 	if err != nil {
@@ -77,7 +77,7 @@ func (c *httpClient) PUT(path string, body interface{}) (*Response, error) {
 
 	req, err := http.NewRequest(
 		http.MethodPut,
-		fmt.Sprintf("%s/%s", c.baseUrl, path),
+		fmt.Sprintf("%s/%s", c.baseURL, path),
 		bytes.NewReader(data),
 	)
 	if err != nil {
@@ -95,7 +95,7 @@ func (c *httpClient) PUT(path string, body interface{}) (*Response, error) {
 func (c *httpClient) DELETE(path string) (*Response, error) {
 	req, err := http.NewRequest(
 		http.MethodDelete,
-		fmt.Sprintf("%s/%s", c.baseUrl, path),
+		fmt.Sprintf("%s/%s", c.baseURL, path),
 		nil,
 	)
 	if err != nil {
@@ -141,7 +141,7 @@ func (r *Response) HasError() bool {
 	return r.StatusCode >= http.StatusBadRequest
 }
 
-func (r *Response) UnmarshalJson(v interface{}) error {
+func (r *Response) UnmarshalJSON(v interface{}) error {
 	buf := new(bytes.Buffer)
 	if _, err := io.Copy(buf, r.Body); err != nil {
 		return err
