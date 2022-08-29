@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
+
       - name: Set up go
         uses: actions/setup-go@v2
         with:
@@ -15,10 +15,10 @@ jobs:
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
-      
+
       - name: Test
-        run: make unit-test
-      
+        run: make test
+
       - name: Upload coverage
         uses: codecov/codecov-action@v1
         with:

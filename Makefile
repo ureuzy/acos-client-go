@@ -1,5 +1,4 @@
-test: lint test-ci
-test-ci: unit-test
+test: lint unit-test
 
 lint: lint-bin ## Run go golangci-lint against code.
 	$(GOLANGCI_LINT) run --timeout 5m0s

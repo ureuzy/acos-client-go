@@ -10,16 +10,6 @@ import (
 
 func main() {
 	config := client.Config{Host: "", User: "", Pass: "", Debug: false}
-
-	/* insecure example
-	opt := func(c *http.Client) {
-		c.Transport = &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		}
-	}
-	c, err := client.New(config, opt)
-	*/
-
 	c, err := client.New(config)
 	if err != nil {
 		log.Fatal(err)

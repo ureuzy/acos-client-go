@@ -1,9 +1,12 @@
 # acos-client-go
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Go Reference](https://pkg.go.dev/badge/github.com/ureuzy/acos-client-go.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
-[![report](https://goreportcard.com/badge/github.com/ureuzy/acos-client-go)](https://goreportcard.com/report/github.com/ureuzy/acos-client-go)
+[![GitHub Action](https://img.shields.io/badge/GitHub-Action-blue)](https://github.com/features/actions)
+[![Documentation](https://img.shields.io/badge/godoc-reference-5272B4.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
+[![Test](https://img.shields.io/github/workflow/status/ureuzy/acos-client-go/Test?label=tests&logo=github)](https://github.com/ureuzy/acos-client-go/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ureuzy/acos-client-go)](https://goreportcard.com/report/github.com/ureuzy/acos-client-go)
 [![codecov](https://codecov.io/gh/ureuzy/acos-client-go/branch/main/graph/badge.svg?token=E0L2IRLDTZ)](https://codecov.io/gh/ureuzy/acos-client-go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/ureuzy/acos-client-go.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
 
 A simple go client for [a10 networks](https://www.a10networks.com/)' aXAPI
 
@@ -62,7 +65,12 @@ There are also several options available that are likely to be used more frequen
 **TLS insecure skip verify**
 
 ```go
-client.New(config, client.InsecureSkipVerify(true))
+opt := func(c *http.Client) {
+    c.Transport = &http.Transport{
+        TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+    }
+}
+c, err := client.New(config, opt)
 ```
 
 ## Authenticate
