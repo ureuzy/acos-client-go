@@ -5,7 +5,7 @@ lint: lint-bin ## Run go golangci-lint against code.
 	$(GOLANGCI_LINT) run --timeout 5m0s
 
 unit-test: mocks
-	go test -v ./... --vet=off
+	go test -v ./... --vet=off -coverprofile cover.out
 
 # Generate mocks
 mocks: mockgen
