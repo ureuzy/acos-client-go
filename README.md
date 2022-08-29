@@ -1,5 +1,11 @@
-# acos-client-go
+[![GitHub Action](https://img.shields.io/badge/GitHub-Action-blue)](https://github.com/features/actions)
+[![Documentation](https://img.shields.io/badge/godoc-reference-5272B4.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
+[![Test](https://img.shields.io/github/workflow/status/ureuzy/acos-client-go/Test?label=tests&logo=github)](https://github.com/ureuzy/acos-client-go/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ureuzy/acos-client-go)](https://goreportcard.com/report/github.com/ureuzy/acos-client-go)
+[![Coverage Status](https://coveralls.io/repos/github/ureuzy/acos-client-go/badge.svg?branch=main)](https://coveralls.io/github/ureuzy/acos-client-go?branch=main)
+[![Releases](https://img.shields.io/github/v/release/ureuzy/acos-client-go)](https://github.com/ureuzy/acos-client-go/releases)
 
+# acos-client-go
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Go Reference](https://pkg.go.dev/badge/github.com/ureuzy/acos-client-go.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
 [![report](https://goreportcard.com/badge/github.com/ureuzy/acos-client-go)](https://goreportcard.com/report/github.com/ureuzy/acos-client-go)
