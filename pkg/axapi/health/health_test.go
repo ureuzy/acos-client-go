@@ -1,7 +1,7 @@
 package health_test
 
 import (
-	"github.com/ureuzy/acos-client-go/pkg/axapi/errors"
+	"errors"
 	"io"
 	"net/http"
 	"strings"
@@ -9,6 +9,7 @@ import (
 
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/gomega"
+	a10errors "github.com/ureuzy/acos-client-go/pkg/axapi/errors"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/health"
 	mockutils "github.com/ureuzy/acos-client-go/pkg/mocks/utils"
 	"github.com/ureuzy/acos-client-go/utils"
@@ -59,6 +60,10 @@ func TestNotFound(t *testing.T) {
 	_, err := sut.Montitor.Get("resource1")
 
 	Ω(err).Should(HaveOccurred())
-	errUnwrapped := err.(*errors.ResponseBody)
+
+	var errUnwrapped *a10errors.ResponseBody
+	ok := errors.As(err, &errUnwrapped)
+	Ω(ok).Should(BeTrue())
+
 	Ω(errUnwrapped.StatusCode).Should(BeIdenticalTo(http.StatusNotFound))
 }
