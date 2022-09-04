@@ -30,7 +30,7 @@ type Object struct {
 	shared.AxaBase `json:",inline"`
 	Name           string       `json:"name,omitempty"`
 	Disable        bool         `json:"disable,omitempty"`
-	Policy         bool         `json:"policy,omitempty"`
+	Policy         string       `json:"policy,omitempty"`
 	Template       Template     `json:"template,omitempty"`
 	TTL            int          `json:"ttl,omitempty"`
 	UseServerTTL   bool         `json:"use-server-ttl,omitempty"`

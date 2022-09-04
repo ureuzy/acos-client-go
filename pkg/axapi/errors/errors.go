@@ -7,7 +7,9 @@ import (
 )
 
 type ResponseBody struct {
-	Response `json:"response"`
+	Status     string
+	StatusCode int
+	Response   `json:"response"`
 }
 
 type Response struct {
@@ -42,5 +44,7 @@ func Handle(response *utils.Response) error {
 	if err := response.UnmarshalJSON(&errResponse); err != nil {
 		return err
 	}
+	errResponse.Status = response.Status
+	errResponse.StatusCode = response.StatusCode
 	return &errResponse
 }

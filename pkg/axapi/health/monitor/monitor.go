@@ -48,15 +48,17 @@ type Object struct {
 	SslTicketLifetime          int    `json:"ssl-ticket-lifetime,omitempty"`
 	SslVersion                 int    `json:"ssl-version,omitempty"`
 	SslDgVersion               int    `json:"ssl-dgversion,omitempty"`
-	Method                     struct {
-		TCP   TCP   `json:"tcp,omitempty"`
-		HTTP  HTTP  `json:"http,omitempty"`
-		HTTPS HTTPS `json:"https,omitempty"`
-	} `json:"method,omitempty"`
-	A10URL string `json:"a10-url,omitempty"`
+	Method                     Method `json:"method,omitempty"`
+	A10URL                     string `json:"a10-url,omitempty"`
 }
 
 type HTTPMethod string
+
+type Method struct {
+	TCP   TCP   `json:"tcp,omitempty"`
+	HTTP  HTTP  `json:"http,omitempty"`
+	HTTPS HTTPS `json:"https,omitempty"`
+}
 
 type HTTP struct {
 	shared.AxaBase        `json:",inline"`
