@@ -9,12 +9,12 @@ import (
 	"github.com/ureuzy/acos-client-go/pkg/client"
 )
 
-func GetMockClient(httpc *MockHTTPClient) *client.Client {
-	return &client.Client{
-		Auth:            auth.New(httpc),
-		ActivePartition: activepartition.New(httpc),
-		Health:          health.New(httpc),
-		Slb:             slb.New(httpc),
-		Gslb:            gslb.New(httpc),
-	}
+func GetMockClient(httpc *MockHTTPClient, cfg client.Config) *client.Client {
+	c := client.Instance(cfg)
+	c.Auth = auth.New(httpc)
+	c.ActivePartition = activepartition.New(httpc)
+	c.Health = health.New(httpc)
+	c.Slb = slb.New(httpc)
+	c.Gslb = gslb.New(httpc)
+	return c
 }

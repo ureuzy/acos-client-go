@@ -10,16 +10,19 @@ import (
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/gomega"
 	a10errors "github.com/ureuzy/acos-client-go/pkg/axapi/errors"
+	"github.com/ureuzy/acos-client-go/pkg/client"
 	"github.com/ureuzy/acos-client-go/pkg/mocks"
 	"github.com/ureuzy/acos-client-go/utils"
 )
+
+var cfg = client.Config{Host: "host", User: "user", Pass: "pwd", Debug: false}
 
 func TestGetMonitor(t *testing.T) {
 	RegisterTestingT(t)
 
 	mockCtrl := gomock.NewController(t)
 	httpc := mocks.NewMockHTTPClient(mockCtrl)
-	c := mocks.GetMockClient(httpc)
+	c := mocks.GetMockClient(httpc, cfg)
 
 	body := io.NopCloser(strings.NewReader("{}"))
 
@@ -42,7 +45,7 @@ func TestNotFound(t *testing.T) {
 
 	mockCtrl := gomock.NewController(t)
 	httpc := mocks.NewMockHTTPClient(mockCtrl)
-	c := mocks.GetMockClient(httpc)
+	c := mocks.GetMockClient(httpc, cfg)
 
 	body := io.NopCloser(strings.NewReader("{}"))
 
