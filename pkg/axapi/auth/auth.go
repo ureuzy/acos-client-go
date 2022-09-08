@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"github.com/ureuzy/acos-client-go/pkg/axapi/errors"
 	"github.com/ureuzy/acos-client-go/utils"
 )
 
@@ -21,6 +22,10 @@ func (o *operator) Login(req *Request) (*Body, error) {
 	res, err := o.POST("auth", req)
 	if err != nil {
 		return nil, err
+	}
+
+	if res.HasError() {
+		return nil, errors.Handle(res)
 	}
 
 	var response Response
