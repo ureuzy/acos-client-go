@@ -73,7 +73,7 @@ func (c *Client) Authenticate() error {
 	return nil
 }
 
-func (c *Client) Loguoff() error {
+func (c *Client) Logoff() error {
 	err := c.Auth.Logoff()
 	if err != nil {
 		return err
