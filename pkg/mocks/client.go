@@ -10,7 +10,7 @@ import (
 )
 
 func GetMockClient(httpc *MockHTTPClient, cfg client.Config) *client.Client {
-	c := client.Instance(cfg)
+	c := client.NewInstance(cfg)
 	c.Auth = auth.New(httpc)
 	c.ActivePartition = activepartition.New(httpc)
 	c.Health = health.New(httpc)

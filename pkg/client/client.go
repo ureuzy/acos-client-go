@@ -31,7 +31,7 @@ type Config struct {
 
 type Option func(*http.Client)
 
-func Instance(conf Config, options ...Option) *Client {
+func NewInstance(conf Config, options ...Option) *Client {
 	httpClient := &http.Client{}
 	for _, opt := range options {
 		opt(httpClient)
@@ -44,15 +44,8 @@ func Instance(conf Config, options ...Option) *Client {
 	return client
 }
 
-func New(conf Config, options ...Option) (*Client, error) {
-	httpClient := &http.Client{}
-	for _, opt := range options {
-		opt(httpClient)
-	}
-
-	baseURL := fmt.Sprintf("https://%s/axapi/v3", conf.Host)
-	client := generateClient(utils.NewHTTPClient(baseURL, httpClient, &http.Header{}, conf.Debug), conf)
-	client.http.AddHeader("Content-Type", "application/json")
+func NewAuthenticated(conf Config, options ...Option) (*Client, error) {
+	client := NewInstance(conf, options...)
 
 	if err := client.Authenticate(); err != nil {
 		return nil, err
