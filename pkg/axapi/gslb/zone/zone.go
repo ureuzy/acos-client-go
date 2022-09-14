@@ -28,13 +28,13 @@ type ListObjects []Object
 // Object Docs: https://acos.docs.a10networks.com/axapi/521p2/axapiv3/gslb_zone.html#zone-attributes
 type Object struct {
 	shared.AxaBase `json:",inline"`
-	Name           string       `json:"name,omitempty"`
-	Disable        bool         `json:"disable,omitempty"`
-	Policy         string       `json:"policy,omitempty"`
-	Template       Template     `json:"template,omitempty"`
-	TTL            int          `json:"ttl,omitempty"`
-	UseServerTTL   bool         `json:"use-server-ttl,omitempty"`
-	DNSSOARecord   DNSSOARecord `json:"dns-soa-record,omitempty"`
+	Name           string         `json:"name,omitempty"`
+	Disable        shared.Boolean `json:"disable,omitempty"`
+	Policy         string         `json:"policy,omitempty"`
+	Template       Template       `json:"template,omitempty"`
+	TTL            int            `json:"ttl,omitempty"`
+	UseServerTTL   shared.Boolean `json:"use-server-ttl,omitempty"`
+	DNSSOARecord   DNSSOARecord   `json:"dns-soa-record,omitempty"`
 }
 
 type Template struct {
@@ -68,7 +68,7 @@ type Service struct {
 	ServiceName        string                  `json:"service-name,omitempty"`
 	Action             string                  `json:"action,omitempty"`       // "enum":[	"drop",	"forward",	"ignore",	"reject"]
 	ForwardType        string                  `json:"forward-type,omitempty"` // "enum":[	"both",	"query",	"response"]
-	Disable            bool                    `json:"disable,omitempty"`
+	Disable            shared.Boolean          `json:"disable,omitempty"`
 	HealthCheckGateway string                  `json:"health-check-gateway,omitempty"` //"enum":[	"enable",	"disable"]
 	HealthCheckPort    []HealthCheckPort       `json:"health-check-port,omitempty"`
 	Policy             string                  `json:"policy,omitempty"`
@@ -109,47 +109,47 @@ type DNSARecord struct {
 
 type DNSCnameRecord struct {
 	AliasName       string                  `json:"alias-name,omitempty"`
-	AdminPreference bool                    `json:"admin-preference,omitempty"`
+	AdminPreference shared.Boolean          `json:"admin-preference,omitempty"`
 	Weight          int                     `json:"weight,omitempty"`
-	AsBackup        bool                    `json:"as-backup,omitempty"`
+	AsBackup        shared.Boolean          `json:"as-backup,omitempty"`
 	SamplingEnable  []shared.SamplingEnable `json:"sampling-enable,omitempty"` // "enum":[	"all",	"cname-hits"]
 }
 
 type DNSARecordSrv struct {
 	shared.AxaBase
-	SvrName   string `json:"svrname,omitempty"`
-	NoResp    bool   `json:"no-resp,omitempty"`
-	AsBackup  bool   `json:"as-backup,omitempty"`
-	Weight    int    `json:"weight,omitempty"`
-	TTL       int    `json:"ttl,omitempty"`
-	AsReplace bool   `json:"as-replace,omitempty"`
-	Disable   bool   `json:"disable,omitempty"`
-	Static    bool   `json:"static,omitempty"`
-	AdminIP   int    `json:"admin-ip,omitempty"`
+	SvrName   string         `json:"svrname,omitempty"`
+	NoResp    shared.Boolean `json:"no-resp,omitempty"`
+	AsBackup  shared.Boolean `json:"as-backup,omitempty"`
+	Weight    int            `json:"weight,omitempty"`
+	TTL       int            `json:"ttl,omitempty"`
+	AsReplace shared.Boolean `json:"as-replace,omitempty"`
+	Disable   shared.Boolean `json:"disable,omitempty"`
+	Static    shared.Boolean `json:"static,omitempty"`
+	AdminIP   int            `json:"admin-ip,omitempty"`
 }
 
 type DNSARecordIPv4 struct {
 	shared.AxaBase
-	DNSARecordIP string `json:"dns-a-record-ip,omitempty"`
-	NoResp       bool   `json:"no-resp,omitempty"`
-	AsBackup     bool   `json:"as-backup,omitempty"`
-	Weight       int    `json:"weight,omitempty"`
-	TTL          int    `json:"ttl,omitempty"`
-	AsReplace    bool   `json:"as-replace,omitempty"`
-	Disable      bool   `json:"disable,omitempty"`
-	Static       bool   `json:"static,omitempty"`
-	AdminIP      int    `json:"admin-ip,omitempty"`
+	DNSARecordIP string         `json:"dns-a-record-ip,omitempty"`
+	NoResp       shared.Boolean `json:"no-resp,omitempty"`
+	AsBackup     shared.Boolean `json:"as-backup,omitempty"`
+	Weight       int            `json:"weight,omitempty"`
+	TTL          int            `json:"ttl,omitempty"`
+	AsReplace    shared.Boolean `json:"as-replace,omitempty"`
+	Disable      shared.Boolean `json:"disable,omitempty"`
+	Static       shared.Boolean `json:"static,omitempty"`
+	AdminIP      int            `json:"admin-ip,omitempty"`
 }
 
 type DNSARecordIPv6 struct {
 	shared.AxaBase
-	DNSARecordIP string `json:"dns-a-record-ipv6,omitempty"`
-	NoResp       bool   `json:"no-resp,omitempty"`
-	AsBackup     bool   `json:"as-backup,omitempty"`
-	Weight       int    `json:"weight,omitempty"`
-	TTL          int    `json:"ttl,omitempty"`
-	AsReplace    bool   `json:"as-replace,omitempty"`
-	Disable      bool   `json:"disable,omitempty"`
-	Static       bool   `json:"static,omitempty"`
-	AdminIP      int    `json:"admin-ip,omitempty"`
+	DNSARecordIP string         `json:"dns-a-record-ipv6,omitempty"`
+	NoResp       shared.Boolean `json:"no-resp,omitempty"`
+	AsBackup     shared.Boolean `json:"as-backup,omitempty"`
+	Weight       int            `json:"weight,omitempty"`
+	TTL          int            `json:"ttl,omitempty"`
+	AsReplace    shared.Boolean `json:"as-replace,omitempty"`
+	Disable      shared.Boolean `json:"disable,omitempty"`
+	Static       shared.Boolean `json:"static,omitempty"`
+	AdminIP      int            `json:"admin-ip,omitempty"`
 }
