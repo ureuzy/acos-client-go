@@ -27,14 +27,18 @@ type ListObjects []Object
 
 // Object Docs: https://acos.docs.a10networks.com/axapi/521p2/axapiv3/gslb_zone.html#zone-attributes
 type Object struct {
-	shared.AxaBase `json:",inline"`
-	Name           string         `json:"name,omitempty"`
-	Disable        shared.Boolean `json:"disable,omitempty"`
-	Policy         string         `json:"policy,omitempty"`
-	Template       Template       `json:"template,omitempty"`
-	TTL            int            `json:"ttl,omitempty"`
-	UseServerTTL   shared.Boolean `json:"use-server-ttl,omitempty"`
-	DNSSOARecord   DNSSOARecord   `json:"dns-soa-record,omitempty"`
+	shared.AxaBase  `json:",inline"`
+	Name            string                  `json:"name,omitempty"`
+	Disable         shared.Boolean          `json:"disable,omitempty"`
+	Policy          string                  `json:"policy,omitempty"`
+	Template        Template                `json:"template,omitempty"`
+	TTL             int                     `json:"ttl,omitempty"`
+	UseServerTTL    shared.Boolean          `json:"use-server-ttl,omitempty"`
+	DNSSOARecord    DNSSOARecord            `json:"dns-soa-record,omitempty"`
+	SamplingEnable  []shared.SamplingEnable `json:"sampling-enable,omitempty"` //"enum":[	"all",	"received-query",	"sent-response",	"proxy-mode-response",	"cache-mode-response",	"server-mode-response",	"sticky-mode-response",	"backup-mode-response"]
+	DNSMXRecordList []DNSMXRecord           `json:"dns-mx-record-list,omitempty"`
+	DNSNSRecordList []DNSNSRecord           `json:"dns-ns-record-list,omitempty"`
+	ServiceList     []Service               `json:"service-list,omitempty"`
 }
 
 type Template struct {
@@ -42,24 +46,20 @@ type Template struct {
 }
 
 type DNSSOARecord struct {
-	SOAName         string                  `json:"soa-name,omitempty"`
-	Mail            string                  `json:"mail,omitempty"`
-	Expire          int                     `json:"expire,omitempty"`
-	Refresh         int                     `json:"refresh,omitempty"`
-	Retry           int                     `json:"retry,omitempty"`
-	Serial          int                     `json:"serial,omitempty"`
-	SOATTL          int                     `json:"soa-ttl,omitempty"`
-	External        string                  `json:"external,omitempty"`
-	ExMail          string                  `json:"ex-mail,omitempty"`
-	ExEpire         int                     `json:"ex-expire,omitempty"`
-	ExRefresh       int                     `json:"ex-refresh,omitempty"`
-	ExRetry         int                     `json:"ex-retry,omitempty"`
-	ExSerial        int                     `json:"ex-serial,omitempty"`
-	ExSoaTTL        int                     `json:"ex-soa-ttl,omitempty"`
-	SamplingEnable  []shared.SamplingEnable `json:"sampling-enable,omitempty"` //"enum":[	"all",	"received-query",	"sent-response",	"proxy-mode-response",	"cache-mode-response",	"server-mode-response",	"sticky-mode-response",	"backup-mode-response"]
-	DNSMXRecordList []DNSMXRecord           `json:"dns-mx-record-list,omitempty"`
-	DNSNSRecordList []DNSNSRecord           `json:"dns-ns-record-list,omitempty"`
-	ServiceList     []Service               `json:"service-list,omitempty"`
+	SOAName   string `json:"soa-name,omitempty"`
+	Mail      string `json:"mail,omitempty"`
+	Expire    int    `json:"expire,omitempty"`
+	Refresh   int    `json:"refresh,omitempty"`
+	Retry     int    `json:"retry,omitempty"`
+	Serial    int    `json:"serial,omitempty"`
+	SOATTL    int    `json:"soa-ttl,omitempty"`
+	External  string `json:"external,omitempty"`
+	ExMail    string `json:"ex-mail,omitempty"`
+	ExEpire   int    `json:"ex-expire,omitempty"`
+	ExRefresh int    `json:"ex-refresh,omitempty"`
+	ExRetry   int    `json:"ex-retry,omitempty"`
+	ExSerial  int    `json:"ex-serial,omitempty"`
+	ExSoaTTL  int    `json:"ex-soa-ttl,omitempty"`
 }
 
 type Service struct {
