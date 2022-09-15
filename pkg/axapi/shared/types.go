@@ -16,11 +16,11 @@ type SamplingEnable struct {
 type Boolean bool
 
 func (b *Boolean) UnmarshalJSON(data []byte) error {
-	var txt string
-	err := json.Unmarshal(data, &txt)
+	var i int
+	err := json.Unmarshal(data, &i)
 	if err != nil {
 		return err
 	}
-	*b = txt == "1" || txt == "true"
+	*b = i > 0
 	return nil
 }
