@@ -43,7 +43,7 @@ type Object struct {
 	DisableAfterDown           shared.Boolean `json:"disable-after-down,omitempty"`
 	Interval                   int            `json:"interval,omitempty"`
 	Timeout                    int            `json:"timeout,omitempty"`
-	SslCiphers                 int            `json:"ssl-ciphers,omitempty"`
+	SslCiphers                 string         `json:"ssl-ciphers,omitempty"`
 	SslTicket                  shared.Boolean `json:"ssl-ticket,omitempty"`
 	SslTicketLifetime          int            `json:"ssl-ticket-lifetime,omitempty"`
 	SslVersion                 int            `json:"ssl-version,omitempty"`
