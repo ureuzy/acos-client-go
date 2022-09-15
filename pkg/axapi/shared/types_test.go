@@ -2,9 +2,10 @@ package shared_test
 
 import (
 	"encoding/json"
+	"testing"
+
 	. "github.com/onsi/gomega"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/shared"
-	"testing"
 )
 
 func Test_UnmarshalBooleanTrue(t *testing.T) {
