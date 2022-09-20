@@ -7,6 +7,7 @@ import (
 	"github.com/ureuzy/acos-client-go/utils"
 )
 
+// Operator Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/operations.html
 type Operator[object any, objectList any] interface {
 	Get(name string, parentnames ...string) (*object, error)
 	List(parentnames ...string) (*objectList, error)

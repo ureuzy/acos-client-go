@@ -39,6 +39,7 @@ func EmptyStringError(s string) error {
 	return nil
 }
 
+// Handle is a function that returns an error response from an ACOS device as an error interface.
 func Handle(response *utils.Response) error {
 	var errResponse ResponseBody
 	if err := response.UnmarshalJSON(&errResponse); err != nil {
