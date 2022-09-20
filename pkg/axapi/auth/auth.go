@@ -1,27 +1,31 @@
 package auth
 
 import (
+	"github.com/ureuzy/acos-client-go/pkg/axapi/errors"
 	"github.com/ureuzy/acos-client-go/utils"
 )
 
 type operator struct {
 	utils.HTTPClient
-	basePath string
 }
 
 type Operator interface {
-	Request(req *Request) (*Body, error)
+	Login(req *Request) (*Body, error)
+	Logoff() error
 }
 
 func New(c utils.HTTPClient) Operator {
-	const path = "auth"
-	return &operator{HTTPClient: c, basePath: path}
+	return &operator{HTTPClient: c}
 }
 
-func (o *operator) Request(req *Request) (*Body, error) {
-	res, err := o.POST(o.basePath, req)
+func (o *operator) Login(req *Request) (*Body, error) {
+	res, err := o.POST("auth", req)
 	if err != nil {
 		return nil, err
+	}
+
+	if res.HasError() {
+		return nil, errors.Handle(res)
 	}
 
 	var response Response
@@ -30,4 +34,9 @@ func (o *operator) Request(req *Request) (*Body, error) {
 	}
 
 	return response.Body, nil
+}
+
+func (o *operator) Logoff() error {
+	_, err := o.POST("logoff", "{}")
+	return err
 }

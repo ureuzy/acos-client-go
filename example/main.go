@@ -10,7 +10,7 @@ import (
 
 func main() {
 	config := client.Config{Host: "", User: "", Pass: "", Debug: false}
-	c, err := client.New(config)
+	c, err := client.NewAuthenticated(config)
 	if err != nil {
 		log.Fatal(err)
 	}

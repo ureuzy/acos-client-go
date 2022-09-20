@@ -22,6 +22,7 @@ type HTTPClient interface {
 	PUT(path string, body interface{}) (*Response, error)
 	DELETE(path string) (*Response, error)
 	AddHeader(key string, value string)
+	RemoveHeader(key string)
 }
 
 func NewHTTPClient(baseURL string, client *http.Client, header *http.Header, debug bool) HTTPClient {
@@ -112,6 +113,10 @@ func (c *httpClient) DELETE(path string) (*Response, error) {
 
 func (c *httpClient) AddHeader(key string, value string) {
 	c.Header.Add(key, value)
+}
+
+func (c *httpClient) RemoveHeader(key string) {
+	c.Header.Del(key)
 }
 
 func (c *httpClient) do(req *http.Request) (*http.Response, error) {

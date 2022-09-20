@@ -30,33 +30,33 @@ type ListObjects []Object
 type Object struct {
 	shared.AxaBase              `json:",inline"`
 	Name                        string           `json:"name,omitempty"`
-	HealthCheck                 bool             `json:"health-check,omitempty"`
-	HealthCheckPreferenceEnable bool             `json:"health-check-preference-enable,omitempty"`
+	HealthCheck                 shared.Boolean   `json:"health-check,omitempty"`
+	HealthCheckPreferenceEnable shared.Boolean   `json:"health-check-preference-enable,omitempty"`
 	HealthPreferenceTop         int              `json:"health-preference-top,omitempty"`
-	AmountFirst                 bool             `json:"amount-first,omitempty"`
-	WeightedIPEnable            bool             `json:"weighted-ip-enable,omitempty"`
-	WeightedIPTotalHits         bool             `json:"weighted-ip-total-hits,omitempty"`
-	WeightedSiteEnable          bool             `json:"weighted-site-enable,omitempty"`
-	WeightedSiteTotalHits       bool             `json:"weighted-site-total-hits,omitempty"`
-	WeightedAlias               bool             `json:"weighted-alias,omitempty"`
-	ActiveServersEnable         bool             `json:"active-servers-enable,omitempty"`
-	ActiveServersFailBreak      bool             `json:"active-servers-fail-break,omitempty"`
-	BwCostEnable                bool             `json:"bw-cost-enable,omitempty"`
-	BwCostFailBreak             bool             `json:"bw-cost-fail-break,omitempty"`
-	Geographic                  bool             `json:"geographic,omitempty"`
-	NumSessionEnable            bool             `json:"num-session-enable,omitempty"`
+	AmountFirst                 shared.Boolean   `json:"amount-first,omitempty"`
+	WeightedIPEnable            shared.Boolean   `json:"weighted-ip-enable,omitempty"`
+	WeightedIPTotalHits         shared.Boolean   `json:"weighted-ip-total-hits,omitempty"`
+	WeightedSiteEnable          shared.Boolean   `json:"weighted-site-enable,omitempty"`
+	WeightedSiteTotalHits       shared.Boolean   `json:"weighted-site-total-hits,omitempty"`
+	WeightedAlias               shared.Boolean   `json:"weighted-alias,omitempty"`
+	ActiveServersEnable         shared.Boolean   `json:"active-servers-enable,omitempty"`
+	ActiveServersFailBreak      shared.Boolean   `json:"active-servers-fail-break,omitempty"`
+	BwCostEnable                shared.Boolean   `json:"bw-cost-enable,omitempty"`
+	BwCostFailBreak             shared.Boolean   `json:"bw-cost-fail-break,omitempty"`
+	Geographic                  shared.Boolean   `json:"geographic,omitempty"`
+	NumSessionEnable            shared.Boolean   `json:"num-session-enable,omitempty"`
 	NumSessionTolerance         int              `json:"num-session-tolerance,omitempty"`
-	AdminPreference             bool             `json:"admin-preference,omitempty"`
-	AliasAdminPreference        bool             `json:"alias-admin-preference,omitempty"`
-	LeastResponse               bool             `json:"least-response,omitempty"`
-	AdminIPEnable               bool             `json:"admin-ip-enable,omitempty"`
-	AdminIPTopOnly              bool             `json:"admin-ip-top-only,omitempty"`
-	OrderedIPTopOnly            bool             `json:"ordered-ip-top-only,omitempty"`
-	RoundRobin                  bool             `json:"round-robin,omitempty"`
-	MetricForceCheck            bool             `json:"metric-force-check,omitempty"`
+	AdminPreference             shared.Boolean   `json:"admin-preference,omitempty"`
+	AliasAdminPreference        shared.Boolean   `json:"alias-admin-preference,omitempty"`
+	LeastResponse               shared.Boolean   `json:"least-response,omitempty"`
+	AdminIPEnable               shared.Boolean   `json:"admin-ip-enable,omitempty"`
+	AdminIPTopOnly              shared.Boolean   `json:"admin-ip-top-only,omitempty"`
+	OrderedIPTopOnly            shared.Boolean   `json:"ordered-ip-top-only,omitempty"`
+	RoundRobin                  shared.Boolean   `json:"round-robin,omitempty"`
+	MetricForceCheck            shared.Boolean   `json:"metric-force-check,omitempty"`
 	IPList                      string           `json:"ip-list,omitempty"`
-	MetricOrder                 bool             `json:"metric-order,omitempty"`
-	MetricType                  bool             `json:"metric-type,omitempty"` // "enum":[  "health-check",  "weighted-ip",  "weighted-site",  "capacity",  "active-servers",  "active-rdt",  "geographic",  "connection-load",  "num-session",  "admin-preference",  "bw-cost",  "least-response",  "admin-ip"]
+	MetricOrder                 shared.Boolean   `json:"metric-order,omitempty"`
+	MetricType                  shared.Boolean   `json:"metric-type,omitempty"` // "enum":[  "health-check",  "weighted-ip",  "weighted-site",  "capacity",  "active-servers",  "active-rdt",  "geographic",  "connection-load",  "num-session",  "admin-preference",  "bw-cost",  "least-response",  "admin-ip"]
 	Capacity                    Capacity         `json:"capacity,omitempty"`
 	ConnectionLoad              ConnectionLoad   `json:"connection-load,omitempty"`
 	DNS                         DNS              `json:"dns,omitempty"`

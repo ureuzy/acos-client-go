@@ -36,8 +36,8 @@ type Object struct {
 	ExternalIP                 string                  `json:"external-ip,omitempty"`
 	IPv6                       string                  `json:"ipv6,omitempty"`
 	HealthCheck                string                  `json:"health-check,omitempty"`
-	HealthCheckProtocolDisable bool                    `json:"health-check-protocol-disable,omitempty"`
-	HealthCheckDisable         bool                    `json:"health-check-disable,omitempty"`
+	HealthCheckProtocolDisable shared.Boolean          `json:"health-check-protocol-disable,omitempty"`
+	HealthCheckDisable         shared.Boolean          `json:"health-check-disable,omitempty"`
 	SamplingEnable             []shared.SamplingEnable `json:"sampling-enable,omitempty"` //"enum":["all","hits","recent"]
 	PortList                   []Port                  `json:"port-list,omitempty"`
 }
@@ -50,7 +50,7 @@ type Port struct {
 	HealthCheck                string                  `json:"health-check,omitempty"`
 	HealthCheckFollowPort      int                     `json:"health-check-follow-port,omitempty"`
 	FollowPortProtocol         string                  `json:"follow-port-protocol,omitempty"`
-	HealthCheckProtocolDisable bool                    `json:"health-check-protocol-disable,omitempty"`
-	HealthCheckDisable         bool                    `json:"health-check-disable,omitempty"`
+	HealthCheckProtocolDisable shared.Boolean          `json:"health-check-protocol-disable,omitempty"`
+	HealthCheckDisable         shared.Boolean          `json:"health-check-disable,omitempty"`
 	SamplingEnable             []shared.SamplingEnable `json:"sampling-enable,omitempty"` //"enum":["all","active","current"]
 }

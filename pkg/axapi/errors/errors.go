@@ -34,7 +34,7 @@ func (r *ResponseBody) Unwrap() error {
 
 func EmptyStringError(s string) error {
 	if s == "" {
-		return errors.New("must be specified")
+		return errors.New("identifier must be specified")
 	}
 	return nil
 }

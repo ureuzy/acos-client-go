@@ -40,7 +40,7 @@ New client
 
 ```go
 config := client.Config{Host: "<HOST>", User: "<USER>", Pass: "<PASS>", Debug: false}
-c, _ := client.New(config)
+c, _ := client.NewAuthenticated(config)
 
 // Get virtual server
 vs, _ := c.Slb.VirtualServer.Get("ureuzy-sample-virtualserver")

@@ -10,17 +10,19 @@ import (
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/gomega"
 	a10errors "github.com/ureuzy/acos-client-go/pkg/axapi/errors"
-	"github.com/ureuzy/acos-client-go/pkg/axapi/health"
-	mockutils "github.com/ureuzy/acos-client-go/pkg/mocks/utils"
+	"github.com/ureuzy/acos-client-go/pkg/client"
+	"github.com/ureuzy/acos-client-go/pkg/mocks"
 	"github.com/ureuzy/acos-client-go/utils"
 )
+
+var cfg = client.Config{Host: "host", User: "user", Pass: "pwd", Debug: false}
 
 func TestGetMonitor(t *testing.T) {
 	RegisterTestingT(t)
 
 	mockCtrl := gomock.NewController(t)
-	httpc := mockutils.NewMockHTTPClient(mockCtrl)
-	sut := health.New(httpc)
+	httpc := mocks.NewMockHTTPClient(mockCtrl)
+	c := mocks.GetMockClient(httpc, cfg)
 
 	body := io.NopCloser(strings.NewReader("{}"))
 
@@ -33,7 +35,7 @@ func TestGetMonitor(t *testing.T) {
 
 	httpc.EXPECT().GET("health/monitor/resource1").Return(resp, nil)
 
-	res, err := sut.Montitor.Get("resource1")
+	res, err := c.Health.Montitor.Get("resource1")
 	Ω(err).ShouldNot(HaveOccurred())
 	Ω(res).ShouldNot(BeNil())
 }
@@ -42,8 +44,8 @@ func TestNotFound(t *testing.T) {
 	RegisterTestingT(t)
 
 	mockCtrl := gomock.NewController(t)
-	httpc := mockutils.NewMockHTTPClient(mockCtrl)
-	sut := health.New(httpc)
+	httpc := mocks.NewMockHTTPClient(mockCtrl)
+	c := mocks.GetMockClient(httpc, cfg)
 
 	body := io.NopCloser(strings.NewReader("{}"))
 
@@ -57,7 +59,7 @@ func TestNotFound(t *testing.T) {
 
 	httpc.EXPECT().GET("health/monitor/resource1").Return(resp, nil)
 
-	_, err := sut.Montitor.Get("resource1")
+	_, err := c.Health.Montitor.Get("resource1")
 
 	Ω(err).Should(HaveOccurred())
 

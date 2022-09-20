@@ -8,7 +8,7 @@ unit-test: mocks
 
 # Generate mocks
 mocks: mockgen
-	$(MOCKGEN) -source utils/http.go -destination pkg/mocks/utils/mock.go HttpClient
+	$(MOCKGEN) -package mocks -source utils/http.go -destination pkg/mocks/mocks.go HttpClient
 
 GOLANGCI_LINT = ./bin/golangci-lint
 lint-bin: ## Download golangci-lint locally if necessary.

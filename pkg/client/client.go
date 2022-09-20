@@ -31,7 +31,7 @@ type Config struct {
 
 type Option func(*http.Client)
 
-func New(conf Config, options ...Option) (*Client, error) {
+func NewInstance(conf Config, options ...Option) *Client {
 	httpClient := &http.Client{}
 	for _, opt := range options {
 		opt(httpClient)
@@ -41,6 +41,12 @@ func New(conf Config, options ...Option) (*Client, error) {
 	client := generateClient(utils.NewHTTPClient(baseURL, httpClient, &http.Header{}, conf.Debug), conf)
 	client.http.AddHeader("Content-Type", "application/json")
 
+	return client
+}
+
+func NewAuthenticated(conf Config, options ...Option) (*Client, error) {
+	client := NewInstance(conf, options...)
+
 	if err := client.Authenticate(); err != nil {
 		return nil, err
 	}
@@ -49,7 +55,7 @@ func New(conf Config, options ...Option) (*Client, error) {
 }
 
 func (c *Client) Authenticate() error {
-	res, err := c.Auth.Request(&auth.Request{Credentials: auth.Credentials{
+	res, err := c.Auth.Login(&auth.Request{Credentials: auth.Credentials{
 		Username: c.conf.User,
 		Password: c.conf.Pass,
 	}})
@@ -57,6 +63,15 @@ func (c *Client) Authenticate() error {
 		return err
 	}
 	c.http.AddHeader("Authorization", fmt.Sprintf("A10 %s", res.Signature))
+	return nil
+}
+
+func (c *Client) Logoff() error {
+	err := c.Auth.Logoff()
+	if err != nil {
+		return err
+	}
+	c.http.RemoveHeader("Authorization")
 	return nil
 }
 
