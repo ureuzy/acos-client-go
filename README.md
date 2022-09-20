@@ -2,7 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Action](https://img.shields.io/badge/GitHub-Action-blue)](https://github.com/features/actions)
-[![Documentation](https://img.shields.io/badge/godoc-reference-5272B4.svg)](https://pkg.go.dev/github.com/ureuzy/acos-client-go)
 [![Test](https://img.shields.io/github/workflow/status/ureuzy/acos-client-go/Test?label=tests&logo=github)](https://github.com/ureuzy/acos-client-go/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ureuzy/acos-client-go)](https://goreportcard.com/report/github.com/ureuzy/acos-client-go)
 [![codecov](https://codecov.io/gh/ureuzy/acos-client-go/branch/main/graph/badge.svg?token=E0L2IRLDTZ)](https://codecov.io/gh/ureuzy/acos-client-go)
@@ -57,7 +56,7 @@ When creating a client, you can accept optional arguments and customize the http
 customHTTPClient := func(client *http.Client) {
 	client = &http.Client{} 
 }
-client.New(config, customHTTPClient)
+client.NewAuthenticated(config, customHTTPClient)
 ```
 
 There are also several options available that are likely to be used more frequently and can be used.
@@ -70,15 +69,22 @@ opt := func(c *http.Client) {
         TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
     }
 }
-c, err := client.New(config, opt)
+c, err := client.NewAuthenticated(config, opt)
 ```
 
 ## Authenticate
 
-A token is issued when the client is created, and is added to the header as a bearer token, but if the token expires, the client can re-authenticate.
+Authenticated and unauthenticated clients can be created.
+
+```text
+c, _ := client.NewAuthenticated(config) // Authenticated
+c := client.NewInstance(config) // Unauthenticated
+```
+
+Unauthenticated clients or tokens that have expired can be re-authenticated
 
 ```go
-client.Authenticate()
+c.Authenticate()
 ```
 
 ## Handle aXAPI error response
