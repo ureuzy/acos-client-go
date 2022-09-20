@@ -32,58 +32,58 @@ type Object struct {
 	AflexScripts                     *AflexScripts          `json:"aflex-scripts,omitempty"`
 	AltProtocol1                     string                 `json:"alt-protocol1,omitempty"`
 	AltProtocol2                     string                 `json:"alt-protocol2,omitempty"`
-	AlternatePort                    int                    `json:"alternate-port,omitempty"`
+	AlternatePort                    shared.Boolean         `json:"alternate-port,omitempty"`
 	AlternatePortNumber              int                    `json:"alternate-port-number,omitempty"`
 	AuthCfg                          *AuthCfg               `json:"auth-cfg,omitempty"`
-	Auto                             int                    `json:"auto,omitempty"`
-	ClientIPStickyNat                int                    `json:"clientip-sticky-nat,omitempty"`
+	Auto                             shared.Boolean         `json:"auto,omitempty"`
+	ClientIPStickyNat                shared.Boolean         `json:"clientip-sticky-nat,omitempty"`
 	ConnLimit                        int                    `json:"conn-limit,omitempty"`
 	DefSelectionIfPrefFailed         string                 `json:"def-selection-if-pref-failed,omitempty"`
-	EnablePlayerIDCheck              int                    `json:"enable-playerid-check,omitempty"`
+	EnablePlayerIDCheck              shared.Boolean         `json:"enable-playerid-check,omitempty"`
 	EthFwd                           int                    `json:"eth-fwd,omitempty"`
 	EthRev                           int                    `json:"eth-rev,omitempty"`
-	Expand                           int                    `json:"expand,omitempty"`
-	ExtendedStats                    int                    `json:"extended-stats,omitempty"`
-	ForceRoutingMode                 int                    `json:"force-routing-mode,omitempty"`
-	GslbEnable                       int                    `json:"gslb-enable,omitempty"`
-	HAConnMirror                     int                    `json:"ha-conn-mirror,omitempty"`
-	IPInIP                           int                    `json:"ipinip,omitempty"`
-	L7HardwareAssist                 int                    `json:"l7-hardware-assist,omitempty"`
-	MessageSwitching                 int                    `json:"message-switching,omitempty"`
+	Expand                           shared.Boolean         `json:"expand,omitempty"`
+	ExtendedStats                    shared.Boolean         `json:"extended-stats,omitempty"`
+	ForceRoutingMode                 shared.Boolean         `json:"force-routing-mode,omitempty"`
+	GslbEnable                       shared.Boolean         `json:"gslb-enable,omitempty"`
+	HAConnMirror                     shared.Boolean         `json:"ha-conn-mirror,omitempty"`
+	IPInIP                           shared.Boolean         `json:"ipinip,omitempty"`
+	L7HardwareAssist                 shared.Boolean         `json:"l7-hardware-assist,omitempty"`
+	MessageSwitching                 shared.Boolean         `json:"message-switching,omitempty"`
 	Name                             string                 `json:"name,omitempty"`
-	NoAutoUpOnAflex                  int                    `json:"no-auto-up-on-aflex,omitempty"`
-	NoDestNat                        int                    `json:"no-dest-nat,omitempty"`
-	NoLogging                        int                    `json:"no-logging,omitempty"`
-	OnSyn                            int                    `json:"on-syn,omitempty"`
+	NoAutoUpOnAflex                  shared.Boolean         `json:"no-auto-up-on-aflex,omitempty"`
+	NoDestNat                        shared.Boolean         `json:"no-dest-nat,omitempty"`
+	NoLogging                        shared.Boolean         `json:"no-logging,omitempty"`
+	OnSyn                            shared.Boolean         `json:"on-syn,omitempty"`
 	PersistType                      string                 `json:"persist-type,omitempty"`
 	Pool                             string                 `json:"pool,omitempty"`
 	PortNumber                       int                    `json:"port-number,omitempty"`
-	PortTranslation                  int                    `json:"port-translation,omitempty"`
-	Precedence                       int                    `json:"precedence,omitempty"`
+	PortTranslation                  shared.Boolean         `json:"port-translation,omitempty"`
+	Precedence                       shared.Boolean         `json:"precedence,omitempty"`
 	Protocol                         string                 `json:"protocol,omitempty"`
 	Range                            int                    `json:"range,omitempty"`
 	Rate                             int                    `json:"rate,omitempty"`
-	RedirectToHTTPS                  int                    `json:"redirect-to-https,omitempty"`
-	ReqFail                          int                    `json:"req-fail,omitempty"`
-	Reset                            int                    `json:"reset,omitempty"`
-	ResetOnServerSelectionFail       int                    `json:"reset-on-server-selection-fail,omitempty"`
-	RtpSipCallIDMatch                int                    `json:"rtp-sip-call-id-match,omitempty"`
+	RedirectToHTTPS                  shared.Boolean         `json:"redirect-to-https,omitempty"`
+	ReqFail                          shared.Boolean         `json:"req-fail,omitempty"`
+	Reset                            shared.Boolean         `json:"reset,omitempty"`
+	ResetOnServerSelectionFail       shared.Boolean         `json:"reset-on-server-selection-fail,omitempty"`
+	RtpSipCallIDMatch                shared.Boolean         `json:"rtp-sip-call-id-match,omitempty"`
 	SamplingEnable                   *shared.SamplingEnable `json:"sampling-enable,omitempty"`
 	ScaleOutBucketCount              int                    `json:"scaleout-bucket-count,omitempty"`
 	ScaleOutDeviceGroup              int                    `json:"scaleout-device-group,omitempty"`
 	Secs                             int                    `json:"secs,omitempty"`
-	ServSelFail                      int                    `json:"serv-sel-fail,omitempty"`
+	ServSelFail                      shared.Boolean         `json:"serv-sel-fail,omitempty"`
 	ServiceGroup                     string                 `json:"service-group,omitempty"`
-	SharedPartitionClientSSLTemplate int                    `json:"shared-partition-client-ssl-template,omitempty"`
-	SharedPartitionHTTPTemplate      int                    `json:"shared-partition-http-template,omitempty"`
-	SharedPartitionServerSSLTemplate int                    `json:"shared-partition-server-ssl-template,omitempty"`
-	SharedPartitionTCP               int                    `json:"shared-partition-tcp,omitempty"`
-	SharedPartitionUDP               int                    `json:"shared-partition-udp,omitempty"`
-	SkipRevHash                      int                    `json:"skip-rev-hash,omitempty"`
-	SNatOnVip                        int                    `json:"snat-on-vip,omitempty"`
+	SharedPartitionClientSSLTemplate shared.Boolean         `json:"shared-partition-client-ssl-template,omitempty"`
+	SharedPartitionHTTPTemplate      shared.Boolean         `json:"shared-partition-http-template,omitempty"`
+	SharedPartitionServerSSLTemplate shared.Boolean         `json:"shared-partition-server-ssl-template,omitempty"`
+	SharedPartitionTCP               shared.Boolean         `json:"shared-partition-tcp,omitempty"`
+	SharedPartitionUDP               shared.Boolean         `json:"shared-partition-udp,omitempty"`
+	SkipRevHash                      shared.Boolean         `json:"skip-rev-hash,omitempty"`
+	SNatOnVip                        shared.Boolean         `json:"snat-on-vip,omitempty"`
 	StatsDataAction                  string                 `json:"stats-data-action,omitempty"`
-	SupportHTTP2                     int                    `json:"support-http2,omitempty"`
-	SynCookie                        int                    `json:"syn-cookie,omitempty"`
+	SupportHTTP2                     shared.Boolean         `json:"support-http2,omitempty"`
+	SynCookie                        shared.Boolean         `json:"syn-cookie,omitempty"`
 	TemplateCache                    string                 `json:"template-cache,omitempty"`
 	TemplateClientSSL                string                 `json:"template-client-ssl,omitempty"`
 	TemplateClientSSLShared          string                 `json:"template-client-ssl-shared,omitempty"`
@@ -124,14 +124,14 @@ type Object struct {
 	TemplateVirtualPort              string                 `json:"template-virtual-port,omitempty"`
 	TrunkFwd                         int                    `json:"trunk-fwd,omitempty"`
 	TrunkRev                         int                    `json:"trunk-rev,omitempty"`
-	UseAlternatePort                 int                    `json:"use-alternate-port,omitempty"`
-	UseCgnv6                         int                    `json:"use-cgnv6,omitempty"`
-	UseDefaultIfNoServer             int                    `json:"use-default-if-no-server,omitempty"`
-	UseRcvHopForResp                 int                    `json:"use-rcv-hop-for-resp,omitempty"`
+	UseAlternatePort                 shared.Boolean         `json:"use-alternate-port,omitempty"`
+	UseCgnv6                         shared.Boolean         `json:"use-cgnv6,omitempty"`
+	UseDefaultIfNoServer             shared.Boolean         `json:"use-default-if-no-server,omitempty"`
+	UseRcvHopForResp                 shared.Boolean         `json:"use-rcv-hop-for-resp,omitempty"`
 	View                             int                    `json:"view,omitempty"`
 	WafTemplate                      string                 `json:"waf-template,omitempty"`
-	WhenDown                         int                    `json:"when-down,omitempty"`
-	WhenDownProtocol2                int                    `json:"when-down-protocol2,omitempty"`
+	WhenDown                         shared.Boolean         `json:"when-down,omitempty"`
+	WhenDownProtocol2                shared.Boolean         `json:"when-down-protocol2,omitempty"`
 }
 type ListObjects []Object
 
