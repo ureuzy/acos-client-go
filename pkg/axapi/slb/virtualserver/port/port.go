@@ -1,4 +1,4 @@
-package virtualserverport
+package port
 
 import (
 	"fmt"
@@ -9,6 +9,8 @@ import (
 )
 
 // Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#port-specification
+
+// /axapi/v3/slb/virtual-server/{name}/port/{port-number}+{protocol}
 
 func New(c utils.HTTPClient, basePath string) rest.Operator[Body, ListBody] {
 	const path = "virtual-server/%s/port"

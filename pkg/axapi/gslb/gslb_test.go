@@ -84,6 +84,29 @@ func TestGetSite(t *testing.T) {
 	Ω(res).ShouldNot(BeNil())
 }
 
+func TestGetSiteIPServer(t *testing.T) {
+	RegisterTestingT(t)
+
+	mockCtrl := gomock.NewController(t)
+	httpc := mocks.NewMockHTTPClient(mockCtrl)
+	c := mocks.GetMockClient(httpc, cfg)
+
+	body := io.NopCloser(strings.NewReader("{}"))
+
+	resp := &utils.Response{
+		Response: &http.Response{
+			StatusCode: http.StatusOK,
+			Body:       body,
+		},
+	}
+
+	httpc.EXPECT().GET("gslb/site/mysite/ip-server/myserver").Return(resp, nil)
+
+	res, err := c.Gslb.SiteIPServer.Get("mysite", "myserver")
+	Ω(err).ShouldNot(HaveOccurred())
+	Ω(res).ShouldNot(BeNil())
+}
+
 func TestGetZone(t *testing.T) {
 	RegisterTestingT(t)
 
@@ -103,6 +126,29 @@ func TestGetZone(t *testing.T) {
 	httpc.EXPECT().GET("gslb/zone/myzone").Return(resp, nil)
 
 	res, err := c.Gslb.Zone.Get("myzone")
+	Ω(err).ShouldNot(HaveOccurred())
+	Ω(res).ShouldNot(BeNil())
+}
+
+func TestGetZoneService(t *testing.T) {
+	RegisterTestingT(t)
+
+	mockCtrl := gomock.NewController(t)
+	httpc := mocks.NewMockHTTPClient(mockCtrl)
+	c := mocks.GetMockClient(httpc, cfg)
+
+	body := io.NopCloser(strings.NewReader("{}"))
+
+	resp := &utils.Response{
+		Response: &http.Response{
+			StatusCode: http.StatusOK,
+			Body:       body,
+		},
+	}
+
+	httpc.EXPECT().GET("gslb/zone/myzone/service/myport+myservice").Return(resp, nil)
+
+	res, err := c.Gslb.ZoneService.Get("myzone", "myport+myservice")
 	Ω(err).ShouldNot(HaveOccurred())
 	Ω(res).ShouldNot(BeNil())
 }

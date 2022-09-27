@@ -12,7 +12,7 @@ mocks: mockgen
 
 GOLANGCI_LINT = ./bin/golangci-lint
 lint-bin: ## Download golangci-lint locally if necessary.
-	$(call go-get-tool,$(GOLANGCI_LINT),github.com/golangci/golangci-lint/cmd/golangci-lint@v1.46.2)
+	$(call go-get-tool,$(GOLANGCI_LINT),github.com/golangci/golangci-lint/cmd/golangci-lint@v1.47.2)
 
 MOCKGEN = ./bin/mockgen
 mockgen: ## Download mockgen locally if necessary.

@@ -79,7 +79,7 @@ func TestGetVirtualServerPort(t *testing.T) {
 
 	httpc.EXPECT().GET("slb/virtual-server/myvirtualserver/port/myport").Return(resp, nil)
 
-	res, err := c.Slb.VirtualServerPort.Get("myport", "myvirtualserver")
+	res, err := c.Slb.VirtualServerPort.Get("myvirtualserver", "myport")
 	Ω(err).ShouldNot(HaveOccurred())
 	Ω(res).ShouldNot(BeNil())
 }
