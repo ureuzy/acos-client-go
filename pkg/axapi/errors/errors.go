@@ -32,6 +32,13 @@ func (r *ResponseBody) Unwrap() error {
 	return r
 }
 
+func EmptyStringArrayError(s []string) error {
+	if len(s) < 1 || s[0] == "" {
+		return errors.New("identifier must be specified")
+	}
+	return nil
+}
+
 func EmptyStringError(s string) error {
 	if s == "" {
 		return errors.New("identifier must be specified")
