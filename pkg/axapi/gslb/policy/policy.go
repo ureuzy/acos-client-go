@@ -8,6 +8,7 @@ import (
 )
 
 // Docs: https://acos.docs.a10networks.com/axapi/521p2/axapiv3/gslb_policy.html
+// URI: /axapi/v3/gslb/policy/{name}
 
 func New(c utils.HTTPClient, basePath string) rest.Operator[Body, ListBody] {
 	const path = "policy"

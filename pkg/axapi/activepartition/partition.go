@@ -6,6 +6,7 @@ import (
 )
 
 // Docs: https://acos.docs.a10networks.com/axapi/521p2/axapiv3/active_partition.html
+// URI: /axapi/v3/active-partition
 
 type operator struct {
 	utils.HTTPClient

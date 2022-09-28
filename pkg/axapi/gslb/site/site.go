@@ -8,6 +8,7 @@ import (
 )
 
 // Docs: https://acos.docs.a10networks.com/axapi/521p2/axapiv3/gslb_site.html
+// URI: /axapi/v3/gslb/site/{site-name}
 
 func New(c utils.HTTPClient, basePath string) rest.Operator[Body, ListBody] {
 	const path = "site"
