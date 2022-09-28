@@ -4,9 +4,9 @@ import (
 	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/policy"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/serviceip"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/site"
-	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/site/ipserver"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/site/siteipserver"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/zone"
-	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/zone/service"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/zone/zoneservice"
 	"github.com/ureuzy/acos-client-go/pkg/rest"
 	"github.com/ureuzy/acos-client-go/utils"
 )
@@ -17,9 +17,9 @@ type Operator struct {
 	Policy       rest.Operator[policy.Body, policy.ListBody]
 	ServiceIP    rest.Operator[serviceip.Body, serviceip.ListBody]
 	Site         rest.Operator[site.Body, site.ListBody]
-	SiteIPServer rest.Operator[ipserver.Body, ipserver.ListBody]
+	SiteIPServer rest.Operator[siteipserver.Body, siteipserver.ListBody]
 	Zone         rest.Operator[zone.Body, zone.ListBody]
-	ZoneService  rest.Operator[service.Body, service.ListBody]
+	ZoneService  rest.Operator[zoneservice.Body, zoneservice.ListBody]
 }
 
 func New(c utils.HTTPClient) *Operator {
@@ -27,8 +27,8 @@ func New(c utils.HTTPClient) *Operator {
 		Policy:       policy.New(c, path),
 		ServiceIP:    serviceip.New(c, path),
 		Site:         site.New(c, path),
-		SiteIPServer: ipserver.New(c, path),
+		SiteIPServer: siteipserver.New(c, path),
 		Zone:         zone.New(c, path),
-		ZoneService:  service.New(c, path),
+		ZoneService:  zoneservice.New(c, path),
 	}
 }

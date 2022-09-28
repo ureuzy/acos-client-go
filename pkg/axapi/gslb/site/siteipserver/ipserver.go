@@ -1,4 +1,4 @@
-package ipserver
+package siteipserver
 
 import (
 	"fmt"

@@ -1,4 +1,4 @@
-package service
+package zoneservice
 
 import (
 	"github.com/ureuzy/acos-client-go/pkg/axapi/shared"

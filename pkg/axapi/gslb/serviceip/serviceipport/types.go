@@ -1,4 +1,4 @@
-package port
+package serviceipport
 
 import "github.com/ureuzy/acos-client-go/pkg/axapi/shared"
 

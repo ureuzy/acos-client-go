@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserver"
-	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserver/port"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserver/virtualserverport"
 	"github.com/ureuzy/acos-client-go/pkg/client"
 )
 
@@ -25,10 +25,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	_, err = c.Slb.VirtualServerPort.CreateList(&port.ListBody{
-		ListObjects: port.ListObjects{
-			port.Object{PortNumber: 80, Protocol: "http"},
-			port.Object{PortNumber: 443, Protocol: "https"},
+	_, err = c.Slb.VirtualServerPort.CreateList(&virtualserverport.ListBody{
+		ListObjects: virtualserverport.ListObjects{
+			virtualserverport.Object{PortNumber: 80, Protocol: "http"},
+			virtualserverport.Object{PortNumber: 443, Protocol: "https"},
 		},
 	}, virtualServer.Name)
 	if err != nil {

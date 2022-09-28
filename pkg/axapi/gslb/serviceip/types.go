@@ -1,7 +1,7 @@
 package serviceip
 
 import (
-	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/serviceip/port"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/gslb/serviceip/serviceipport"
 	"github.com/ureuzy/acos-client-go/pkg/axapi/shared"
 )
 
@@ -19,5 +19,5 @@ type Object struct {
 	HealthCheckProtocolDisable shared.Boolean          `json:"health-check-protocol-disable,omitempty"`
 	HealthCheckDisable         shared.Boolean          `json:"health-check-disable,omitempty"`
 	SamplingEnable             []shared.SamplingEnable `json:"sampling-enable,omitempty"` //"enum":["all","hits","recent"]
-	PortList                   []port.Port             `json:"port-list,omitempty"`
+	PortList                   []serviceipport.Port    `json:"port-list,omitempty"`
 }

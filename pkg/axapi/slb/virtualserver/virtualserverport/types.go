@@ -1,14 +1,6 @@
-package port
+package virtualserverport
 
 import "github.com/ureuzy/acos-client-go/pkg/axapi/shared"
-
-type ListBody struct {
-	ListObjects `json:"port-list"`
-}
-
-type Body struct {
-	Object `json:"port"`
-}
 
 // Object Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_virtual_server_port.html#port-attributes
 type Object struct {

@@ -1,4 +1,4 @@
-package port
+package virtualserverport
 
 import (
 	"fmt"
@@ -14,4 +14,12 @@ import (
 func New(c utils.HTTPClient, basePath string) rest.Operator[Body, ListBody] {
 	const path = "virtual-server/%s/port"
 	return rest.Rest[Body, ListBody](c, fmt.Sprintf("%s/%s", basePath, path))
+}
+
+type ListBody struct {
+	ListObjects `json:"port-list"`
+}
+
+type Body struct {
+	Object `json:"port"`
 }
