@@ -28,12 +28,14 @@ func Rest[object any, objectList any](c utils.HTTPClient, path string) Operator[
 }
 
 func (o *operator[object, objectList]) Get(names ...string) (*object, error) {
-	err := errors.EmptyStringArrayError(names)
+	pathf := o.basePath + "/%s"
+
+	err := errors.ArgsMismatchError(pathf, names)
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := o.GET(o.getFormattedURL(o.basePath+"/%s", names))
+	res, err := o.GET(o.getFormattedURL(pathf, names))
 	if err != nil {
 		return nil, err
 	}
@@ -51,6 +53,11 @@ func (o *operator[object, objectList]) Get(names ...string) (*object, error) {
 }
 
 func (o *operator[object, objectList]) List(names ...string) (*objectList, error) {
+	err := errors.ArgsMismatchError(o.basePath, names)
+	if err != nil {
+		return nil, err
+	}
+
 	res, err := o.GET(o.getFormattedURL(o.basePath, names))
 	if err != nil {
 		return nil, err
@@ -69,6 +76,11 @@ func (o *operator[object, objectList]) List(names ...string) (*objectList, error
 }
 
 func (o *operator[object, objectList]) Create(instance *object, names ...string) (*object, error) {
+	err := errors.ArgsMismatchError(o.basePath, names)
+	if err != nil {
+		return nil, err
+	}
+
 	res, err := o.POST(o.getFormattedURL(o.basePath, names), instance)
 	if err != nil {
 		return nil, err
@@ -87,6 +99,11 @@ func (o *operator[object, objectList]) Create(instance *object, names ...string)
 }
 
 func (o *operator[object, objectList]) CreateList(instance *objectList, names ...string) (*objectList, error) {
+	err := errors.ArgsMismatchError(o.basePath, names)
+	if err != nil {
+		return nil, err
+	}
+
 	res, err := o.POST(o.getFormattedURL(o.basePath, names), instance)
 	if err != nil {
 		return nil, err
@@ -105,12 +122,13 @@ func (o *operator[object, objectList]) CreateList(instance *objectList, names ..
 }
 
 func (o *operator[object, objectList]) Modify(instance *object, names ...string) (*object, error) {
-	err := errors.EmptyStringArrayError(names)
+	path := o.basePath + "/%s"
+	err := errors.ArgsMismatchError(path, names)
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := o.POST(o.getFormattedURL(o.basePath+"/%s", names), instance)
+	res, err := o.POST(o.getFormattedURL(path, names), instance)
 	if err != nil {
 		return nil, err
 	}
@@ -128,12 +146,13 @@ func (o *operator[object, objectList]) Modify(instance *object, names ...string)
 }
 
 func (o *operator[object, objectList]) Replace(instance *object, names ...string) (*object, error) {
-	err := errors.EmptyStringArrayError(names)
+	path := o.basePath + "/%s"
+	err := errors.ArgsMismatchError(path, names)
 	if err != nil {
 		return nil, err
 	}
 
-	res, err := o.PUT(o.getFormattedURL(o.basePath+"/%s", names), instance)
+	res, err := o.PUT(o.getFormattedURL(path, names), instance)
 	if err != nil {
 		return nil, err
 	}
@@ -151,12 +170,13 @@ func (o *operator[object, objectList]) Replace(instance *object, names ...string
 }
 
 func (o *operator[object, objectList]) Delete(names ...string) error {
-	err := errors.EmptyStringArrayError(names)
+	path := o.basePath + "/%s"
+	err := errors.ArgsMismatchError(path, names)
 	if err != nil {
 		return err
 	}
 
-	res, err := o.DELETE(o.getFormattedURL(o.basePath+"/%s", names))
+	res, err := o.DELETE(o.getFormattedURL(path, names))
 	if err != nil {
 		return err
 	}

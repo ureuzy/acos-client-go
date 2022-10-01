@@ -2,6 +2,8 @@ package errors
 
 import (
 	"errors"
+	"fmt"
+	"strings"
 
 	"github.com/ureuzy/acos-client-go/utils"
 )
@@ -32,9 +34,10 @@ func (r *ResponseBody) Unwrap() error {
 	return r
 }
 
-func EmptyStringArrayError(s []string) error {
-	if len(s) < 1 || s[0] == "" {
-		return errors.New("identifier must be specified")
+func ArgsMismatchError(pathf string, vals []string) error {
+	cnt := strings.Count(pathf, "%")
+	if cnt != len(vals) {
+		return fmt.Errorf("wrong number of arguments: required: %d actual %d", cnt, len(vals))
 	}
 	return nil
 }
