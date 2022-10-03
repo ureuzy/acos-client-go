@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserver"
-	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserverport"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/slb/virtualserver/virtualserverport"
 	"github.com/ureuzy/acos-client-go/pkg/client"
 )
 

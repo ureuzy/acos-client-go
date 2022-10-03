@@ -1,4 +1,4 @@
-package server
+package zoneservice
 
 import (
 	"fmt"
@@ -7,17 +7,20 @@ import (
 	"github.com/ureuzy/acos-client-go/utils"
 )
 
-// Docs: https://documentation.a10networks.com/ACOS/414x/ACOS_4_1_4-P1/html/axapiv3/slb_server.html#server-specification
+// Docs: https://acos.docs.a10networks.com/axapi/521p2/axapiv3/gslb_zone_service.html
+// URI: /axapi/v3/gslb/zone/{name}/service/{service-port}+{service-name}
 
 func New(c utils.HTTPClient, basePath string) rest.Operator[Body, ListBody] {
-	const path = "server"
+	const path = "zone/%s/service"
 	return rest.Rest[Body, ListBody](c, fmt.Sprintf("%s/%s", basePath, path))
 }
 
 type ListBody struct {
-	ListObjects `json:"server-list"`
+	ListObjects `json:"service-list"`
 }
 
 type Body struct {
-	Object `json:"server"`
+	Service `json:"service"`
 }
+
+type ListObjects []Service

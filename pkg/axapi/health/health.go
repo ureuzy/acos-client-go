@@ -1,7 +1,7 @@
 package health
 
 import (
-	"github.com/ureuzy/acos-client-go/pkg/axapi/health/monitor"
+	"github.com/ureuzy/acos-client-go/pkg/axapi/health/healthmonitor"
 	"github.com/ureuzy/acos-client-go/pkg/rest"
 	"github.com/ureuzy/acos-client-go/utils"
 )
@@ -9,11 +9,11 @@ import (
 const path = "health"
 
 type Operator struct {
-	Montitor rest.Operator[monitor.Body, monitor.ListBody]
+	Montitor rest.Operator[healthmonitor.Body, healthmonitor.ListBody]
 }
 
 func New(c utils.HTTPClient) *Operator {
 	return &Operator{
-		Montitor: monitor.New(c, path),
+		Montitor: healthmonitor.New(c, path),
 	}
 }
