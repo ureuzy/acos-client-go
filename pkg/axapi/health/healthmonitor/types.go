@@ -32,9 +32,9 @@ type Object struct {
 type HTTPMethod string
 
 type Method struct {
-	TCP   TCP   `json:"tcp,omitempty"`
-	HTTP  HTTP  `json:"http,omitempty"`
-	HTTPS HTTPS `json:"https,omitempty"`
+	TCP   *TCP   `json:"tcp,omitempty"`
+	HTTP  *HTTP  `json:"http,omitempty"`
+	HTTPS *HTTPS `json:"https,omitempty"`
 }
 
 type HTTP struct {
