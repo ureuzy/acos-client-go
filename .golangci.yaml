@@ -1,9 +1,8 @@
 run:
-  timeout: 1m
+  timeout: 5m
 linters:
   enable:
     - asciicheck
-    - deadcode
     - depguard
     - dogsled
     - durationcheck
@@ -28,7 +27,6 @@ linters:
     - typecheck
     - unconvert
     - unused
-    - varcheck
   disable:
     # https://github.com/golangci/golangci-lint/issues/2649
     - structcheck
