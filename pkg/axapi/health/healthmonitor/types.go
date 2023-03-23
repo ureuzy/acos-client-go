@@ -49,7 +49,7 @@ type HTTP struct {
 	TextRegex             string         `json:"text-regex,omitempty"`
 	HTTPHost              string         `json:"http-host,omitempty"`
 	HTTPMaintenanceCode   string         `json:"http-maintenance-code,omitempty"`
-	HTTPURL               string         `json:"http-url,omitempty"`
+	HTTPURL               shared.Boolean `json:"http-url,omitempty"`
 	URLType               HTTPMethod     `json:"url-type,omitempty"`
 	Maintenance           shared.Boolean `json:"maintenance,omitempty"`
 	MaintenanceText       string         `json:"maintenance-text,omitempty"`
