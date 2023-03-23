@@ -15,7 +15,7 @@ type Service struct {
 	HealthCheckPort    []HealthCheckPort       `json:"health-check-port,omitempty"`
 	Policy             string                  `json:"policy,omitempty"`
 	SamplingEnable     []shared.SamplingEnable `json:"sampling-enable,omitempty"` // "enum":[	"all",	"received-query",	"sent-response",	"proxy-mode-response",	"cache-mode-response",	"server-mode-response",	"sticky-mode-response",	"backup-mode-response"]
-	DNSARecord         DNSARecord              `json:"dns-a-record,omitempty"`
+	DNSARecord         *DNSARecord             `json:"dns-a-record,omitempty"`
 	DNSCNAMERecordList []DNSCnameRecord        `json:"dns-cname-record-list,omitempty"`
 	DNSMXRecordList    []DNSMXRecord           `json:"dns-mx-record-list,omitempty"`
 	DNSNSRecordList    []DNSMXRecord           `json:"dns-ns-record-list,omitempty"`

@@ -14,7 +14,7 @@ type Object struct {
 	Template        Template                  `json:"template,omitempty"`
 	TTL             int                       `json:"ttl,omitempty"`
 	UseServerTTL    shared.Boolean            `json:"use-server-ttl,omitempty"`
-	DNSSOARecord    zoneservice.DNSSOARecord  `json:"dns-soa-record,omitempty"`
+	DNSSOARecord    *zoneservice.DNSSOARecord `json:"dns-soa-record,omitempty"`
 	SamplingEnable  []shared.SamplingEnable   `json:"sampling-enable,omitempty"` //"enum":[	"all",	"received-query",	"sent-response",	"proxy-mode-response",	"cache-mode-response",	"server-mode-response",	"sticky-mode-response",	"backup-mode-response"]
 	DNSMXRecordList []zoneservice.DNSMXRecord `json:"dns-mx-record-list,omitempty"`
 	DNSNSRecordList []zoneservice.DNSNSRecord `json:"dns-ns-record-list,omitempty"`
