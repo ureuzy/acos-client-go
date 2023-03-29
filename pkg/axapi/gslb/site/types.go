@@ -21,8 +21,8 @@ type Object struct {
 	ProtoAgingFast       shared.Boolean          `json:"proto-aging-fast,omitempty"`
 	Controller           string                  `json:"controller,omitempty"`
 	IPServerList         []siteipserver.IPServer `json:"ip-server-list,omitempty"`
-	ActiveRdt            ActiveRdt               `json:"active-rdt,omitempty"`
-	EasyRdt              EasyRdt                 `json:"easy-rdt,omitempty"`
+	ActiveRdt            *ActiveRdt              `json:"active-rdt,omitempty"`
+	EasyRdt              *EasyRdt                `json:"easy-rdt,omitempty"`
 	SlbDevList           []SlbDevList            `json:"slb-dev-list,omitempty"`
 }
 

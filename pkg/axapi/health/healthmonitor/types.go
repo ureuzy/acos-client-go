@@ -32,9 +32,10 @@ type Object struct {
 type HTTPMethod string
 
 type Method struct {
-	TCP   TCP   `json:"tcp,omitempty"`
-	HTTP  HTTP  `json:"http,omitempty"`
-	HTTPS HTTPS `json:"https,omitempty"`
+	TCP   *TCP   `json:"tcp,omitempty"`
+	HTTP  *HTTP  `json:"http,omitempty"`
+	HTTPS *HTTPS `json:"https,omitempty"`
+	ICMP  *ICMP  `json:"icmp,omitempty"`
 }
 
 type HTTP struct {
@@ -48,7 +49,7 @@ type HTTP struct {
 	TextRegex             string         `json:"text-regex,omitempty"`
 	HTTPHost              string         `json:"http-host,omitempty"`
 	HTTPMaintenanceCode   string         `json:"http-maintenance-code,omitempty"`
-	HTTPURL               string         `json:"http-url,omitempty"`
+	HTTPURL               shared.Boolean `json:"http-url,omitempty"`
 	URLType               HTTPMethod     `json:"url-type,omitempty"`
 	Maintenance           shared.Boolean `json:"maintenance,omitempty"`
 	MaintenanceText       string         `json:"maintenance-text,omitempty"`
@@ -112,6 +113,14 @@ type TCP struct {
 	PortResp        string         `json:"port-resp,omitempty"`
 	Maintenance     shared.Boolean `json:"maintenance,omitempty"`
 	MaintenanceText string         `json:"maintenance-text,omitempty"`
+}
+
+type ICMP struct {
+	shared.AxaBase `json:",inline"`
+	ICMP           shared.Boolean `json:"icmp,omitempty"`
+	IP             string         `json:"ip,omitempty"`
+	IPV6           string         `json:"ipv6,omitempty"`
+	Transparent    shared.Boolean `json:"transparent,omitempty"`
 }
 
 type KerberosKdc struct {

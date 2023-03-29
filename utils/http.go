@@ -151,8 +151,5 @@ func (r *Response) UnmarshalJSON(v interface{}) error {
 	if _, err := io.Copy(buf, r.Body); err != nil {
 		return err
 	}
-	if err := json.Unmarshal(buf.Bytes(), v); err != nil {
-		return err
-	}
-	return nil
+	return json.Unmarshal(buf.Bytes(), v)
 }
